@@ -7,18 +7,21 @@ using UnityEngine.UI;
 public class TitleScreen : MonoBehaviour {
 
     KeyCode Exit = KeyCode.Escape;
-    bool ButtonsEnabled;
-    bool IsNotOnCreditScreen;
     public Image TitleScreenBackground;
     float TitleScreenMovementSpeed;
     float MoveScreen;
+    //Tells you when buttons can be pressed and when escape does what
+    bool CanPressButtons;
+    bool IsOnCredits;
+    bool ScreenIsNotScrolling;
     Vector3 OriginalTitlePosition;
     Vector3 CreditTitlePosition;
 
     // Use this for initialization
     void Start() {
-        ButtonsEnabled = true;
-        IsNotOnCreditScreen = true;
+        CanPressButtons = true;
+        IsOnCredits = false;
+        ScreenIsNotScrolling = false;
         TitleScreenMovementSpeed = .5f;
         OriginalTitlePosition = new Vector3(0f, 540f, 0f);
         CreditTitlePosition = new Vector3(0f, -540f, 0f);
@@ -26,26 +29,29 @@ public class TitleScreen : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        if (IsNotOnCreditScreen)
+        //While the screen is scrolling escape does nothing, while on credits it takes you back to main menu and while on menu it quits the game
+        if(ScreenIsNotScrolling)
         {
-            if (Input.GetKey(Exit))
+            if (IsOnCredits)
             {
-                Application.Quit();
+                if (Input.GetKeyDown(Exit))
+                {
+                    ReturnFromCredits();
+                }
+            }
+            else
+            {
+                if (Input.GetKeyDown(Exit))
+                {
+                    Application.Quit();
+                }
             }
         }
-        else
-        {
-            if(Input.GetKey(Exit))
-            {
-                StartCoroutine(MoveTitleScreenDown());
-            }
-        }
-        
     }
 
     public void PlayButton()
     {
-        if (ButtonsEnabled)
+        if(CanPressButtons)
         {
             SceneManager.LoadScene("FirstFloor");
         }
@@ -53,53 +59,60 @@ public class TitleScreen : MonoBehaviour {
 
     public void CreditsButton()
     {
-        if (ButtonsEnabled)
+        if(CanPressButtons)
         {
-            IsNotOnCreditScreen = false;
+            CanPressButtons = false;
+            ScreenIsNotScrolling = false;
             StartCoroutine(MoveTitleScreenUp());
         }
     }
 
     public void ReturnFromCredits()
     {
-        if (true)
+        if(CanPressButtons)
         {
-            
+            CanPressButtons = false;
+            ScreenIsNotScrolling = false;
+            StartCoroutine(MoveTitleScreenDown());
         }
-        ButtonsEnabled = true;
-        StartCoroutine(MoveTitleScreenDown());
     }
 
     IEnumerator MoveTitleScreenUp()
     {
-        ButtonsEnabled = false;
         while (MoveScreen < 1)
         {
             MoveScreen += TitleScreenMovementSpeed * Time.deltaTime;
             yield return null;
             TitleScreenBackground.transform.localPosition = Vector3.Lerp(OriginalTitlePosition, CreditTitlePosition, MoveScreen);
         }
-        ButtonsEnabled = true;
+        MoveScreen = 0;
+        CanPressButtons = true;
+        ScreenIsNotScrolling = true;
+        IsOnCredits = true;
     }
 
     IEnumerator MoveTitleScreenDown()
     {
-        ButtonsEnabled = false;
         while (MoveScreen < 1)
         {
             MoveScreen += TitleScreenMovementSpeed * Time.deltaTime;
             yield return null;
-            TitleScreenBackground.transform.position = Vector3.Lerp(CreditTitlePosition, OriginalTitlePosition, MoveScreen);
+            TitleScreenBackground.transform.localPosition = Vector3.Lerp(CreditTitlePosition, OriginalTitlePosition, MoveScreen);
         }
-        ButtonsEnabled = true;
-        IsNotOnCreditScreen = true;
+        MoveScreen = 0;
+        CanPressButtons = true;
+        ScreenIsNotScrolling = true;
+        IsOnCredits = false;
     }
 
 
 
     public void QuitGame()
     {
-        Application.Quit();
+        if(CanPressButtons)
+        {
+            Application.Quit();
+        }
     }
 
 }

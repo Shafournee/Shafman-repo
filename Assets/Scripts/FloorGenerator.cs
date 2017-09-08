@@ -35,7 +35,8 @@ public class FloorGenerator : MonoBehaviour {
         GameManager = GameObject.FindGameObjectWithTag("GameManager");
         MinimapBackground = GameObject.Find("MinimapBackground");
         RoomNumber = 3;
-        RoomMax = GameManager.GetComponent<GameManager>().FloorLevel + 6;
+        //RoomMax = GameManager.GetComponent<GameManager>().FloorLevel + 6;
+        RoomMax = 4;
         Roomx = 0;
         Roomy = 0;
         RoomList = new List<GameObject>();

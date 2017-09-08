@@ -6,6 +6,7 @@ public class BaseBoss : MonoBehaviour {
 
     protected float BossMaxHealth;
     protected float BossCurrentHealth;
+    protected bool DoesDamageOnHit;
     public string BossName;
     public Sprite BossSprite;
     GameObject Canvas;
@@ -31,6 +32,19 @@ public class BaseBoss : MonoBehaviour {
             Destroy(gameObject);
             GameObject.FindGameObjectWithTag("RoomManager").GetComponent<RoomManager>().OpenTheExitOnBossDeath();
             GameObject.FindGameObjectWithTag("RoomManager").GetComponent<RoomManager>().OpenDoorsOnEnemyDeaths();
+            //Hide the boss healthbar on death
+            Canvas.GetComponent<PlayerUI>().HideTheBossHealthBar();
         }
     }
+
+    //Damages the player on contact if the boss is meant to by changing a bool in the child boss script
+
+    protected virtual void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.collider.tag == "Player" && DoesDamageOnHit == true)
+        {
+            collision.collider.GetComponent<Player>().OnHit(transform.position);
+        }
+    }
+
 }

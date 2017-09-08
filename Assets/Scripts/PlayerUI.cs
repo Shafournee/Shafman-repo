@@ -137,6 +137,7 @@ public class PlayerUI : MonoBehaviour {
     IEnumerator RunBossFightScreenCoroutine(Sprite BossSprite, string BossName)
     {
         ShowBossFightScreen(BossSprite, BossName);
+        //Length of time you show the boss screen for
         yield return new WaitForSeconds(4f);
         HideBossFightScreen();
     }
