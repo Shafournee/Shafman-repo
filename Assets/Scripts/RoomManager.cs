@@ -135,7 +135,7 @@ public class RoomManager : MonoBehaviour {
         //Get the Boss Sprite and the Boss Name to draw on the screen
         Canvas.GetComponent<PlayerUI>().BossFightScreenCoroutine(BossSprite, BossName);
         Canvas.GetComponent<PlayerUI>().ShowTheBossHealthBar();
-        yield return new WaitForSeconds(.1f);
+        yield return new WaitForSeconds(4.1f);
         Boss.gameObject.SetActive(true);
     }
 
@@ -147,8 +147,8 @@ public class RoomManager : MonoBehaviour {
         }
         //Find the current room
         GameObject CurrentRoom = GameObject.Find("Room(" + RoomCoordinatex + "," + RoomCoordinatey + ")");
-        //Check to see if the number of enemies in a room is 0 and there are no bosses
-        if (CurrentRoom.GetComponentsInChildren<BaseEnemy>(true).Length == 0 && CurrentRoom.GetComponentsInChildren<BaseBoss>(true).Length == 0)
+        //Check to see if the number of enemies in a room is 0 and there are no bosses and no enemies on the floor at all
+        if (CurrentRoom.GetComponentsInChildren<BaseEnemy>(true).Length == 0 && CurrentRoom.GetComponentsInChildren<BaseBoss>(true).Length == 0 && Object.FindObjectsOfType<BaseEnemy>().Length == 0)
         {
             //If the enemies in a room is = 0 open all doors
             for (int i = 0; i < Doors.Length; i++)
