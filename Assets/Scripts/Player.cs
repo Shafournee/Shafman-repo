@@ -26,7 +26,7 @@ public class Player : MonoBehaviour {
 
     KeyCode TellBool = KeyCode.B;
 
-    enum BodyDirection { Up, Down, Left, Right }
+    enum BodyDirection { Up, Down, Left, Right, Static }
 
     //Make us able to call the Ball Prefab
     public Transform BallPrefab;
@@ -96,7 +96,7 @@ public class Player : MonoBehaviour {
         BulletSize = 1f;
 
         HeadAnimator = GetComponentsInChildren<Animator>()[0];
-        BodyAnimator = GetComponentsInChildren<Animator>()[1];
+        BodyAnimator = transform.Find("Body").GetComponent<Animator>();
 
         SpriteHead = transform.Find("Head").GetComponent<SpriteRenderer>();
         SpriteBody = transform.Find("Body").GetComponent<SpriteRenderer>();
@@ -134,11 +134,6 @@ public class Player : MonoBehaviour {
         {
             GameManager.GetComponent<GameManager>().PauseGame();
         }
-
-        if (Input.GetKeyDown(TellBool))
-        {
-            print(BodyAnimator.GetInteger("WalkDirection"));
-        }
         //Ensure the player can't go higher than 12 hearts
         if (MaxHealth > 24)
         {
@@ -148,7 +143,6 @@ public class Player : MonoBehaviour {
 
     void PlayerMovement()
     {
-
         //Make the player move up
         if (Input.GetKey(MoveUp))
         {
@@ -193,6 +187,11 @@ public class Player : MonoBehaviour {
         {
             PlayerBody.velocity = new Vector2(0f, PlayerBody.velocity.y);
             BulletVelocityModifierx = 0f;
+        }
+        //Reset the body to standing if movement keys are released
+        if (Input.GetKeyUp(MoveUp) || Input.GetKeyUp(MoveDown) || Input.GetKeyUp(MoveLeft) || Input.GetKeyUp(MoveRight))
+        {
+            BodyAnimationManager(BodyDirection.Static);
         }
     }
 
@@ -493,7 +492,7 @@ public class Player : MonoBehaviour {
     {
         if(MoveDirection == BodyDirection.Down)
         {
-            BodyAnimator.SetInteger("WalkDirection", 1);
+            BodyAnimator.Play("WalkDown");
         }
         else if(MoveDirection == BodyDirection.Up)
         {
@@ -507,7 +506,7 @@ public class Player : MonoBehaviour {
         {
 
         }
-        else
+        else if (MoveDirection == BodyDirection.Static)
         {
             BodyAnimator.Play("Standing");
         }
