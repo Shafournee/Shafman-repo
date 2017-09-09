@@ -20,7 +20,7 @@ MonoBehaviour:
   m_ShowMode: 4
   m_Title: 
   m_RootView: {fileID: 6}
-  m_MinSize: {x: 950, y: 300}
+  m_MinSize: {x: 950, y: 542}
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &2
 MonoBehaviour:
@@ -45,7 +45,7 @@ MonoBehaviour:
   m_MinSize: {x: 683, y: 492}
   m_MaxSize: {x: 14004, y: 14042}
   vertical: 0
-  controlID: 116
+  controlID: 11
 --- !u!114 &3
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -143,7 +143,7 @@ MonoBehaviour:
     y: 0
     width: 1920
     height: 1038
-  m_MinSize: {x: 950, y: 300}
+  m_MinSize: {x: 950, y: 542}
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &7
 MonoBehaviour:
@@ -260,7 +260,7 @@ MonoBehaviour:
   - {fileID: 17}
   - {fileID: 12}
   m_Selected: 0
-  m_LastSelected: 1
+  m_LastSelected: 2
 --- !u!114 &12
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -286,21 +286,23 @@ MonoBehaviour:
     x: 381
     y: 91
     width: 1148
-    height: 576
+    height: 575
   m_ViewPositions:
     m_KeySerializationHelper:
     - {fileID: 1107483961066709088, guid: 379f6176822ba914fa55617492643115, type: 2}
     - {fileID: 1107119429699507324, guid: 080a8adf92b1be543a069d9511818512, type: 2}
     - {fileID: 1107117755443619004, guid: 87d40f12359977140b2db0003e1273b4, type: 2}
+    - {fileID: 1107805524927627256, guid: 72b10ae460346be408fadbbfce4f8df4, type: 2}
     m_ValueSerializationHelper:
     - {x: 652.80005, y: 226.20001}
-    - {x: 724.80005, y: 357.6}
-    - {x: 664.80005, y: 291.2}
+    - {x: 724.80005, y: 311}
+    - {x: 664.80005, y: 291}
+    - {x: 638.80005, y: 299}
   m_PreviewAnimator: {fileID: 0}
-  m_AnimatorController: {fileID: 9100000, guid: 87d40f12359977140b2db0003e1273b4,
+  m_AnimatorController: {fileID: 9100000, guid: 72b10ae460346be408fadbbfce4f8df4,
     type: 2}
   m_BreadCrumbs:
-  - m_Target: {fileID: 1107117755443619004, guid: 87d40f12359977140b2db0003e1273b4,
+  - m_Target: {fileID: 1107805524927627256, guid: 72b10ae460346be408fadbbfce4f8df4,
       type: 2}
     m_ScrollPosition: {x: 0, y: 0}
   stateMachineGraph: {fileID: 0}
@@ -351,19 +353,19 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 0
     m_Folders:
-    - Assets/Scripts/Boss Scripts
+    - Assets/Sprites/SpriteSheets/PlayerSpriteSheets
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Scripts/Boss Scripts
+  - Assets/Sprites/SpriteSheets/PlayerSpriteSheets
   m_LastFoldersGridSize: -1
   m_LastProjectPath: E:\Unity Projects\Shafman-repo
   m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 95}
-    m_SelectedIDs: 1a280000
-    m_LastClickedID: 10266
-    m_ExpandedIDs: 0000000026260000722600008026000098260000a6260000e4270000062800001e28000030290000e629000000ca9a3bffffff7f
+    scrollPos: {x: 0, y: 254}
+    m_SelectedIDs: cc270000
+    m_LastClickedID: 10188
+    m_ExpandedIDs: 0000000026260000722600008026000098260000a6260000e8270000142800002c28000040290000f629000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -391,7 +393,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 0000000026260000722600008026000098260000a6260000e4270000062800001e28000030290000e6290000
+    m_ExpandedIDs: 0000000026260000722600008026000098260000a6260000e8270000142800002c28000040290000f6290000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -419,7 +421,7 @@ MonoBehaviour:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
     m_HadKeyboardFocusLastEvent: 1
-    m_ExpandedInstanceIDs: c6230000f6240000702c00002c2900000e27000006280000fc3400001227000000000000
+    m_ExpandedInstanceIDs: c6230000f6240000702c00002c2900000e27000006280000fc3400001227000000000000d6330000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -507,9 +509,9 @@ MonoBehaviour:
     height: 575
   m_TreeViewState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 
-    m_LastClickedID: 0
-    m_ExpandedIDs: 88beffff1afcffff00000000
+    m_SelectedIDs: 18fcffff14fcffff
+    m_LastClickedID: -1004
+    m_ExpandedIDs: 18fcffff1afcffff00000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -559,14 +561,14 @@ MonoBehaviour:
     width: 1148
     height: 575
   m_SceneLighting: 1
-  lastFramingTime: 1764.5365486877215
+  lastFramingTime: 436.4933098751319
   m_2DMode: 1
   m_isRotationLocked: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -0.6260854, y: -2.7547503, z: 0}
+    m_Target: {x: -0.52377784, y: -0.13521592, z: 0}
     speed: 2
-    m_Value: {x: -0.6260854, y: -2.7547503, z: 0}
+    m_Value: {x: -0.52377784, y: -0.13521592, z: 0}
   m_RenderMode: 0
   m_ValidateTrueMetals: 0
   m_SceneViewState:
@@ -593,9 +595,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 70.67631
+    m_Target: 1.8169715
     speed: 2
-    m_Value: 70.67631
+    m_Value: 1.8169715
   m_Ortho:
     m_Target: 1
     speed: 2
