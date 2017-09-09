@@ -227,7 +227,7 @@ public class Player : MonoBehaviour {
         if (!IsInvincible)
         {
             LoseHealth();
-            StartCoroutine(Knockback(DamageSourcePosition));
+            //StartCoroutine(Knockback(DamageSourcePosition));
             StartCoroutine(InvincibilityCoroutine());
         }
 

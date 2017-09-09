@@ -15,7 +15,7 @@ c24a21b131bfa67be1162db2cba4b52b UnityEngine.Timeline.dll:UnityEngine.Timeline.T
 25aa67a0612b674a940639a06b6ea65e Assembly-CSharp.dll:.TurretEnemy
 25aa67a0612b674a940639a06b6ea65e Assembly-CSharp.dll:.BigFlyEnemy
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.BaseItem
-2583ce37189f2d9309cebb7120a5c79c Assembly-CSharp.dll:.PlayerUI
+e6c421b56c9f3a62ac1a07f10437d856 Assembly-CSharp.dll:.PlayerUI
 e25bab34b2571ec5008f7438a8385c6c Assembly-CSharp.dll:.FullHeartPickup
 a35dc9cca2faebc5f5f1aeb9e8e47bbe UnityEngine.UI.dll:UnityEngine.UI.AspectRatioFitter
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.UI.dll:UnityEngine.EventSystems.BaseInput
@@ -117,7 +117,9 @@ c2275a8bfbb9f9942cad75ecdfded41d UnityEngine.HoloLens.dll:UnityEngine.VR.WSA.Spa
 45f3431f0103c41611e8d4eec3d439df UnityEngine.HoloLens.dll:UnityEngine.VR.WSA.SpatialMappingRenderer
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.Exit
 e25bab34b2571ec5008f7438a8385c6c Assembly-CSharp.dll:.HeartPickup
+592f0852ad32a0250a25d27e3aed1018 Assembly-CSharp.dll:.Minimap
 e25bab34b2571ec5008f7438a8385c6c Assembly-CSharp.dll:.HalfHeartPickup
+22a44a0cf8aa07b28fe8cbe7877a1281 Assembly-CSharp.dll:.TheDudeOfFlies
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.WalkingEnemy
 470a0f6f99172e995c0328cb3aa65108 Assembly-CSharp.dll:.AudioManager
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.GhostItem
@@ -135,8 +137,8 @@ e9bdabf9265d758d56f01bb188916fa8 UnityEngine.Networking.dll:UnityEngine.Networki
 3f32f08a64daf40b09ed864d96fe3840 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransform
 73843688b51256aed059f049c540bca8 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransformChild
 528ea1fd7c01796fc60c4e2f172ea229 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransformVisualizer
-74a78f50180713395f54867e58447483 Assembly-CSharp.dll:.FloorGenerator
-30db1cba0142361df83855697930b8a2 Assembly-CSharp.dll:.Player
+f5810cfb572ed2eb1c9f07d95f3330d0 Assembly-CSharp.dll:.FloorGenerator
+346ce1683ec83f0ae6531f8bd101c20d Assembly-CSharp.dll:.Player
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.BaseEnemy
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.TestRunner.dll:UnityEngine.TestTools.TestRunner.Callbacks.PlayModeRunnerCallback
 5f2ad81aa8994e8fbe25d1e57afe6773 UnityEngine.TestRunner.dll:UnityEngine.TestTools.TestRunner.PlaymodeTestsController
@@ -148,10 +150,13 @@ c2275a8bfbb9f9942cad75ecdfded41d UnityEngine.HoloLens.dll:UnityEngine.VR.WSA.Spa
 45f3431f0103c41611e8d4eec3d439df UnityEngine.HoloLens.dll:UnityEngine.VR.WSA.SpatialMappingRenderer
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.BunnySlippersItem
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.CatFoodItem
-05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.TitleScreen
+5fd3544bd48c7fba2622d25949d47adf Assembly-CSharp.dll:.TitleScreen
+ba0c94ae1314497b73ec78f33db82039 Assembly-CSharp.dll:.BaseBoss
 25aa67a0612b674a940639a06b6ea65e Assembly-CSharp.dll:.DirectionalTurretEnemy
-59207f08148a9f97b8218596ce180022 Assembly-CSharp.dll:.GameManager
-312ebcf99cad313af8c9d618df3acdbe Assembly-CSharp.dll:.ItemRoom
+43ffe171bc561f47305711b627b9e457 Assembly-CSharp.dll:.GameManager
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.ItemRoom
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.Bullet
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.Totes
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.ExitRoom
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.CatnipItem
-130b31765aaebb5a9fbf78d4ef3b2863 Assembly-CSharp.dll:.RoomManager
+c475361342879bd5212fc6ee2a95df36 Assembly-CSharp.dll:.RoomManager
