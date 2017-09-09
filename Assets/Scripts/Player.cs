@@ -26,6 +26,8 @@ public class Player : MonoBehaviour {
 
     KeyCode TellBool = KeyCode.B;
 
+    enum BodyDirection { Up, Down, Left, Right }
+
     //Make us able to call the Ball Prefab
     public Transform BallPrefab;
     //Provides a temporary game object for the pickup animation
@@ -94,6 +96,8 @@ public class Player : MonoBehaviour {
         BulletSize = 1f;
 
         HeadAnimator = GetComponentsInChildren<Animator>()[0];
+        BodyAnimator = GetComponentsInChildren<Animator>()[1];
+
         SpriteHead = transform.Find("Head").GetComponent<SpriteRenderer>();
         SpriteBody = transform.Find("Body").GetComponent<SpriteRenderer>();
 
@@ -133,7 +137,7 @@ public class Player : MonoBehaviour {
 
         if (Input.GetKeyDown(TellBool))
         {
-            print(PlayerCanShoot);
+            print(BodyAnimator.GetInteger("WalkDirection"));
         }
         //Ensure the player can't go higher than 12 hearts
         if (MaxHealth > 24)
@@ -150,7 +154,7 @@ public class Player : MonoBehaviour {
         {
             PlayerBody.velocity = new Vector2(PlayerBody.velocity.x, Speed);
             BulletVelocityModifiery = 20f;
-            BodyAnimationManager("Up");
+            BodyAnimationManager(BodyDirection.Up);
         }
 
         //Make the player move down
@@ -158,7 +162,7 @@ public class Player : MonoBehaviour {
         {
             PlayerBody.velocity = new Vector2(PlayerBody.velocity.x, -Speed);
             BulletVelocityModifiery = -20f;
-            BodyAnimationManager("Down");
+            BodyAnimationManager(BodyDirection.Down);
         }
 
         //Make the player's vertical velocity go to zero if pressing no vertical movement keys
@@ -173,7 +177,7 @@ public class Player : MonoBehaviour {
         {
             PlayerBody.velocity = new Vector2(-Speed, PlayerBody.velocity.y);
             BulletVelocityModifierx = -20f;
-            BodyAnimationManager("Left");
+            BodyAnimationManager(BodyDirection.Left);
         }
 
         //Make the player move right
@@ -181,7 +185,7 @@ public class Player : MonoBehaviour {
         {
             PlayerBody.velocity = new Vector2(Speed, PlayerBody.velocity.y);
             BulletVelocityModifierx = 20f;
-            BodyAnimationManager("Right");
+            BodyAnimationManager(BodyDirection.Right);
         }
 
         //Make the player's horizontal velocity go to zero if pressing no horizontal movement keys
@@ -475,7 +479,7 @@ public class Player : MonoBehaviour {
         }
         else if (HeadDirection == "Static")
         {
-            HeadAnimator.Play("DefaultHead");
+
         }
         else
         {
@@ -485,8 +489,27 @@ public class Player : MonoBehaviour {
     }
 
     //Handles the direction and animations of the body
-    private void BodyAnimationManager(string BodyDirection)
+    private void BodyAnimationManager(BodyDirection MoveDirection)
     {
+        if(MoveDirection == BodyDirection.Down)
+        {
+            BodyAnimator.SetInteger("WalkDirection", 1);
+        }
+        else if(MoveDirection == BodyDirection.Up)
+        {
 
+        }
+        else if (MoveDirection == BodyDirection.Left)
+        {
+
+        }
+        else if (MoveDirection == BodyDirection.Right)
+        {
+
+        }
+        else
+        {
+            BodyAnimator.Play("Standing");
+        }
     }
 }
