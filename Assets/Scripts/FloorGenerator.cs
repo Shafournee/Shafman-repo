@@ -25,6 +25,8 @@ public class FloorGenerator : MonoBehaviour {
     //Tell the game if it's spawning the exit room so you can change the sprite of the door
     bool ItemRoomSpawning;
     bool ExitRoomSpawning;
+    public Sprite NormalDoorTopBottom;
+    public Sprite NormalDoorRightLeft;
     public Sprite ItemDoorTopBottom;
     public Sprite ItemDoorRightLeft;
     public Sprite ExitDoorTopBottom;
@@ -218,6 +220,12 @@ public class FloorGenerator : MonoBehaviour {
                 OriginDoor.GetComponent<SpriteRenderer>().flipY = true;
                 ItemRoomSpawning = false;
             }
+            //If neither the item or exit room assign the normal room sprite
+            else
+            {
+                OriginDoor.GetComponent<SpriteRenderer>().sprite = NormalDoorTopBottom;
+                OriginDoor.GetComponent<SpriteRenderer>().flipY = true;
+            }
         }
         else if (DoorSide == "Up")
         {
@@ -233,6 +241,10 @@ public class FloorGenerator : MonoBehaviour {
             {
                 OriginDoor.GetComponent<SpriteRenderer>().sprite = ItemDoorTopBottom;
                 ItemRoomSpawning = false;
+            }
+            else
+            {
+                OriginDoor.GetComponent<SpriteRenderer>().sprite = NormalDoorTopBottom;
             }
         }
         else if (DoorSide == "Left")
@@ -252,6 +264,11 @@ public class FloorGenerator : MonoBehaviour {
                 OriginDoor.GetComponent<SpriteRenderer>().flipX = true;
                 ItemRoomSpawning = false;
             }
+            else
+            {
+                OriginDoor.GetComponent<SpriteRenderer>().sprite = NormalDoorRightLeft;
+                OriginDoor.GetComponent<SpriteRenderer>().flipY = true;
+            }
         }
         else if (DoorSide == "Right")
         {
@@ -267,6 +284,10 @@ public class FloorGenerator : MonoBehaviour {
             {
                 OriginDoor.GetComponent<SpriteRenderer>().sprite = ItemDoorRightLeft;
                 ItemRoomSpawning = false;
+            }
+            else
+            {
+                OriginDoor.GetComponent<SpriteRenderer>().sprite = NormalDoorRightLeft;
             }
         }
     }

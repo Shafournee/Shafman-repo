@@ -1,22 +1,15 @@
 fileFormatVersion: 2
-guid: 453ec13517268514da32ceb943b84868
-timeCreated: 1505589989
+guid: 293498641028bcd4a9f1826b43bbb55e
+timeCreated: 1505589886
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: ToastSpriteSheet_0
-    21300002: ToastSpriteSheet_1
-    21300004: ToastSpriteSheet_2
-    21300006: ToastSpriteSheet_3
-    21300008: ToastSpriteSheet_4
-    21300010: ToastSpriteSheet_5
-    21300012: ToastSpriteSheet_6
-    21300014: ToastSpriteSheet_7
-    21300016: ToastSpriteSheet_8
-    21300018: ToastSpriteSheet_9
-    21300020: ToastSpriteSheet_10
-    21300022: ToastSpriteSheet_11
-    21300024: ToastSpriteSheet_12
+    21300000: DoorSpriteSheet_0
+    21300002: DoorSpriteSheet_1
+    21300004: DoorSpriteSheet_2
+    21300006: DoorSpriteSheet_3
+    21300008: DoorSpriteSheet_4
+    21300010: DoorSpriteSheet_5
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -88,57 +81,85 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: ToastSpriteSheet_0
+      name: DoorSpriteSheet_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 267
-        width: 298.5
-        height: 267
+        y: 202
+        width: 188
+        height: 119
       alignment: 9
-      pivot: {x: 0.58206165, y: 0.4643221}
+      pivot: {x: 0.5, y: 0.52}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: ToastSpriteSheet_1
+      name: DoorSpriteSheet_1
       rect:
         serializedVersion: 2
-        x: 394
-        y: 297
-        width: 202
-        height: 158
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 188
+        y: 202
+        width: 188
+        height: 119
+      alignment: 9
+      pivot: {x: 0.5, y: 0.52}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: ToastSpriteSheet_2
+      name: DoorSpriteSheet_2
       rect:
         serializedVersion: 2
-        x: 90
-        y: 0
-        width: 206
-        height: 200
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 375
+        y: 202
+        width: 188
+        height: 119
+      alignment: 9
+      pivot: {x: 0.5, y: 0.52}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: ToastSpriteSheet_3
+      name: DoorSpriteSheet_3
       rect:
         serializedVersion: 2
-        x: 371
-        y: 0
-        width: 225
-        height: 196
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 4
+        y: 5
+        width: 119
+        height: 192
+      alignment: 9
+      pivot: {x: 0.52, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: DoorSpriteSheet_4
+      rect:
+        serializedVersion: 2
+        x: 126
+        y: 6
+        width: 119
+        height: 191
+      alignment: 9
+      pivot: {x: 0.52, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: DoorSpriteSheet_5
+      rect:
+        serializedVersion: 2
+        x: 247
+        y: 5
+        width: 119
+        height: 192
+      alignment: 9
+      pivot: {x: 0.52, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
