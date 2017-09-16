@@ -6,7 +6,6 @@ public class BigFlyEnemy : BaseEnemy {
 
     private Transform PlayerPosition;
     private const float speed = .5f;
-    private float EnemyHealth = 4;
     public Transform EnemyBullet;
     bool IsShootingCoroutineRunning = false;
     //Find the unit vector on which the fly should shoot
@@ -22,6 +21,7 @@ public class BigFlyEnemy : BaseEnemy {
     {
         Animator = GetComponent<Animator>();
         PlayerPosition = GameObject.FindGameObjectWithTag("Player").transform;
+        EnemyHealth = 4;
     }
 
     // Update is called once per frame
@@ -50,14 +50,8 @@ public class BigFlyEnemy : BaseEnemy {
 
     public override void OnHit(Vector3 DamageSourcePosition, float PlayerBulletDamage)
     {
+        base.OnHit(DamageSourcePosition, PlayerBulletDamage);
         StartCoroutine(Knockback(DamageSourcePosition));
-        EnemyHealth = EnemyHealth - PlayerBulletDamage;
-        if (EnemyHealth <= 0)
-        {
-            //Destroy the enemy and run the script to see if all the enemies in a room are dead
-            Destroy(gameObject);
-            GameObject.FindGameObjectWithTag("RoomManager").GetComponent<RoomManager>().OpenDoorsOnEnemyDeaths();
-        }
     }
 
     private void OnCollisionStay2D(Collision2D collision)
@@ -68,19 +62,7 @@ public class BigFlyEnemy : BaseEnemy {
         }
     }
 
-    IEnumerator Knockback(Vector3 ColliderPosition)
-    {
-        const float CoroutineLoopTimeIncrementer = .2f;
-        const float CoroutineTotalLoopTime = 1f;
-        float CoroutineIncrementedLoopTime = 0f;
-        const float KnockbackDistance = -.1f;
-        while (CoroutineIncrementedLoopTime <= CoroutineTotalLoopTime)
-        {
-            transform.position = Vector3.MoveTowards(transform.position, ColliderPosition, KnockbackDistance);
-            CoroutineIncrementedLoopTime += CoroutineLoopTimeIncrementer;
-            yield return null;
-        }
-    }
+    
 
     IEnumerator BigFlyShootingScript()
     {

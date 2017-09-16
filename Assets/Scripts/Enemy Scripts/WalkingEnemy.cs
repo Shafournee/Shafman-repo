@@ -9,7 +9,6 @@ public class WalkingEnemy : BaseEnemy {
     float HorizontalVelocity;
     float InitialDirection;
     float ChangeDirection;
-    float EnemyHealth = 4;
     float ActualVelocity;
     enum Direction { Up, Down, Left, Right }
     List<Direction> DirectionList;
@@ -20,6 +19,7 @@ public class WalkingEnemy : BaseEnemy {
 
         Rigidbody = GetComponent<Rigidbody2D>();
         ActualVelocity = 5f;
+        EnemyHealth = 4;
         DirectionList = new List<Direction>();
         ChooseDirection();
     }
@@ -126,13 +126,7 @@ public class WalkingEnemy : BaseEnemy {
 
     public override void OnHit(Vector3 DamageSourcePosition, float PlayerBulletDamage)
     {
-        EnemyHealth = EnemyHealth - PlayerBulletDamage;
-        if (EnemyHealth <= 0)
-        {
-            //Destroy the enemy and run the script to see if all the enemies in a room are dead
-            Destroy(gameObject);
-            GameObject.FindGameObjectWithTag("RoomManager").GetComponent<RoomManager>().OpenDoorsOnEnemyDeaths();
-        }
+        base.OnHit(DamageSourcePosition, PlayerBulletDamage);
     }
 
 }

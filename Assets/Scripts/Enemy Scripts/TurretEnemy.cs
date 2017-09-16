@@ -7,7 +7,6 @@ public class TurretEnemy : BaseEnemy {
     //Get the transform of the enemy bullet
     public Transform EnemyBullet;
     SpriteRenderer Sprite;
-    float EnemyHealth = 3;
     //Determines the position of the where the bullet comes out if facing left or right
     int BulletPosition = -1;
     //Determines the velocity of the bullet if facing left or right
@@ -16,9 +15,9 @@ public class TurretEnemy : BaseEnemy {
     // Use this for initialization
     void Start()
     {
+        EnemyHealth = 3;
         Sprite = GetComponent<SpriteRenderer>();
         DirectionTurretIsFacing();
-        
         StartCoroutine(StationaryTurretEnemyShootingScript());
     }
 
@@ -33,13 +32,7 @@ public class TurretEnemy : BaseEnemy {
 
     public override void OnHit(Vector3 DamageSourcePosition, float PlayerBulletDamage)
     {
-        EnemyHealth = EnemyHealth - PlayerBulletDamage;
-        if (EnemyHealth <= 0)
-        {
-            //Destroy the enemy and run the script to see if all the enemies in a room are dead
-            Destroy(gameObject);
-            GameObject.FindGameObjectWithTag("RoomManager").GetComponent<RoomManager>().OpenDoorsOnEnemyDeaths();
-        }
+        base.OnHit(DamageSourcePosition, PlayerBulletDamage);
     }
 
 

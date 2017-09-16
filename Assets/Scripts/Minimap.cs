@@ -5,9 +5,6 @@ using UnityEngine.UI;
 
 public class Minimap : MonoBehaviour {
 
-    GameObject FloorGenerator;
-    GameObject RoomManager;
-    //List<Vector2> RoomCoordinates;
     //Stores the coordinates of each room in the minimap
     List<Vector2> MinimapCoordinates;
     //Stores the coordinate of the room the player is currently in
@@ -32,9 +29,7 @@ public class Minimap : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        FloorGenerator = GameObject.FindGameObjectWithTag("FloorGenerator");
         //RoomCoordinates = FloorGenerator.GetComponent<FloorGenerator>().CoordinateList;
-        RoomManager = GameObject.FindGameObjectWithTag("RoomManager");
     }
 	
 	// Update is called once per frame

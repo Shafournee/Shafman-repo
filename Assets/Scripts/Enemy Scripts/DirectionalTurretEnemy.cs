@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class DirectionalTurretEnemy : BaseEnemy {
 
-    float EnemyHealth = 3;
     Transform PlayerPosition;
     bool IsShootingCoroutineRunning = false;
     public Transform EnemyBullet;
@@ -17,11 +16,16 @@ public class DirectionalTurretEnemy : BaseEnemy {
     // Use this for initialization
     void Start () {
         PlayerPosition = GameObject.FindGameObjectWithTag("Player").transform;
+        EnemyHealth = 3;
     }
 	
 	// Update is called once per frame
 	void Update () {
+        MoveToPlayer();
+    }
 
+    private void MoveToPlayer()
+    {
         //Get the actual value for the unit vector
         VectorToPlayer = new Vector2(PlayerPosition.transform.position.x - gameObject.transform.position.x, PlayerPosition.transform.position.y - gameObject.transform.position.y);
 
@@ -38,13 +42,7 @@ public class DirectionalTurretEnemy : BaseEnemy {
 
     public override void OnHit(Vector3 DamageSourcePosition, float PlayerBulletDamage)
     {
-        EnemyHealth = EnemyHealth - PlayerBulletDamage;
-        if (EnemyHealth <= 0)
-        {
-            //Destroy the enemy and run the script to see if all the enemies in a room are dead
-            Destroy(gameObject);
-            GameObject.FindGameObjectWithTag("RoomManager").GetComponent<RoomManager>().OpenDoorsOnEnemyDeaths();
-        }
+        base.OnHit(DamageSourcePosition, PlayerBulletDamage);
     }
 
     

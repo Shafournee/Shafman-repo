@@ -7,7 +7,6 @@ public class HeartPickup : MonoBehaviour {
     protected int HealthValue;
     public bool IsColliding = true;
     SpriteRenderer HeartSprite;
-    Color SpawnTransparent = new Color(1f, 1f, 1f, 0f);
     Color BecomeVisable = new Color(1f, 1f, 1f, 1f);
 
     // Use this for initialization

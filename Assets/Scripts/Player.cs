@@ -24,8 +24,6 @@ public class Player : MonoBehaviour {
 
     KeyCode Exit = KeyCode.Escape;
 
-    KeyCode TellBool = KeyCode.B;
-
     enum BodyDirection { Up, Down, Left, Right, Static }
 
     //Make us able to call the Ball Prefab
@@ -47,14 +45,13 @@ public class Player : MonoBehaviour {
     [NonSerialized] public float MinimumTimeBetweenFiring;
 
     [NonSerialized] public float BulletSize;
-    private float NextFire;
 
     //Turns the player see through and makes them walk through rocks and over spikes
     [NonSerialized] public bool IsGhost;
     //Sets whether the player is invincible after recently taking damage
     bool IsInvincible;
     //Make the player unable to move
-    bool PlayerCanMove;
+    public bool PlayerCanMove;
     //Make the player unable to fire
     public bool PlayerCanShoot;
     //Checks if the player is colliding with any objects
@@ -86,7 +83,6 @@ public class Player : MonoBehaviour {
         MaxHealth = 6;
         BulletDamage = 1f;
         MinimumTimeBetweenFiring = .5f;
-        NextFire = 0.0f;
         IsGhost = false;
         IsInvincible = false;
         PlayerCanMove = true;

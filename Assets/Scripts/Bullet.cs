@@ -4,13 +4,11 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour {
 
-    Transform BulletPosition;
     //Get the player to get the bullet damage
     float PlayerBulletDamage;
 
 	// Use this for initialization
 	void Start () {
-        BulletPosition = gameObject.transform;
         PlayerBulletDamage = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().BulletDamage;
 	}
 	

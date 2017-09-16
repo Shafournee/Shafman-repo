@@ -43,6 +43,7 @@ public class RoomManager : MonoBehaviour {
         Exit = GameObject.FindGameObjectWithTag("Exit");
         Exit.GetComponent<BoxCollider2D>().enabled = false;
         Exit.GetComponent<SpriteRenderer>().enabled = false;
+        DisableEnemiesOnStart();
     }
 	
 	// Update is called once per frame
@@ -51,6 +52,17 @@ public class RoomManager : MonoBehaviour {
 
         
 
+    }
+
+    private void DisableEnemiesOnStart()
+    {
+        GameObject[] Enemies;
+        Enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        for(int i = 0; i < Enemies.Length; i++)
+        {
+            Enemies[i].GetComponent<SpriteRenderer>().enabled = false;
+            Enemies[i].GetComponent<BaseEnemy>().enabled = false;
+        }
     }
 
     //Update Coordinates, Teleport the player, and teleport the camera when the player enters a door trigger
@@ -84,6 +96,7 @@ public class RoomManager : MonoBehaviour {
             PlayerTransform.position = new Vector3(PlayerTransform.position.x, PlayerTransform.position.y - 5, PlayerTransform.position.z);
             CameraTransform.position = new Vector3(CameraTransform.position.x, CameraTransform.position.y - 12, CameraTransform.position.z);
         }
+        //Moves the minimap upon entering the new room
         Minimap.GetComponent<Minimap>().MoveTheMinimap(DoorSide, RoomCoordinatex, RoomCoordinatey);
         Minimap.GetComponent<Minimap>().SetRoomsActive();
 
@@ -100,6 +113,10 @@ public class RoomManager : MonoBehaviour {
                 Doors[i].GetComponent<SpriteRenderer>().enabled = false;
             }
             StartCoroutine(HoldForEnemiesToSpawn(CurrentRoom));
+            //Disable the player movement
+            PlayerTransform.GetComponent<Player>().PlayerCanShoot = false;
+            PlayerTransform.GetComponent<Player>().PlayerCanMove = false;
+            PlayerTransform.GetComponent<Rigidbody2D>().velocity = new Vector3(0f, 0f, 1f);
             if(CurrentRoom.GetComponentsInChildren<BaseBoss>(true).Length > 0)
             {
                 StartCoroutine(SpawnTheBoss(CurrentRoom));
@@ -114,15 +131,19 @@ public class RoomManager : MonoBehaviour {
 
     private IEnumerator HoldForEnemiesToSpawn(GameObject CurrentRoom)
     {
-        for (int i = 0; i < 2; i++)
+        for (int i = 0; i < 30; i++)
         {
             yield return null;
         }
+        //reenable the player movement
+        PlayerTransform.GetComponent<Player>().PlayerCanShoot = true;
+        PlayerTransform.GetComponent<Player>().PlayerCanMove = true;
         //Activates each enemy in a room
         BaseEnemy[] EnemiesInRoom = CurrentRoom.GetComponentsInChildren<BaseEnemy>(true);
         for (int i = 0; i < EnemiesInRoom.Length; i++)
         {
-            EnemiesInRoom[i].gameObject.SetActive(true);
+            EnemiesInRoom[i].gameObject.GetComponent<BaseEnemy>().enabled = true;
+            EnemiesInRoom[i].gameObject.GetComponent<SpriteRenderer>().enabled = true;
         }
     }
     //Spawns the boss (and does the other things) for the current room
@@ -136,7 +157,10 @@ public class RoomManager : MonoBehaviour {
         Canvas.GetComponent<PlayerUI>().BossFightScreenCoroutine(BossSprite, BossName);
         Canvas.GetComponent<PlayerUI>().ShowTheBossHealthBar();
         yield return new WaitForSeconds(4.1f);
-        Boss.gameObject.SetActive(true);
+        //Enable the player, and then enable the boss
+        PlayerTransform.GetComponent<Player>().PlayerCanShoot = true;
+        PlayerTransform.GetComponent<Player>().PlayerCanMove = true;
+        Boss.gameObject.GetComponent<BaseBoss>().enabled = true;
     }
 
     public IEnumerator HoldFor15FramesToEnsureEnemyDeathThenOpenDoors()
@@ -148,7 +172,7 @@ public class RoomManager : MonoBehaviour {
         //Find the current room
         GameObject CurrentRoom = GameObject.Find("Room(" + RoomCoordinatex + "," + RoomCoordinatey + ")");
         //Check to see if the number of enemies in a room is 0 and there are no bosses and no enemies on the floor at all
-        if (CurrentRoom.GetComponentsInChildren<BaseEnemy>(true).Length == 0 && CurrentRoom.GetComponentsInChildren<BaseBoss>(true).Length == 0 && Object.FindObjectsOfType<BaseEnemy>().Length == 0)
+        if (CurrentRoom.GetComponentsInChildren<BaseEnemy>(true).Length == 0 && CurrentRoom.GetComponentsInChildren<BaseBoss>(true).Length == 0)
         {
             //If the enemies in a room is = 0 open all doors
             for (int i = 0; i < Doors.Length; i++)

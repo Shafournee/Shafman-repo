@@ -12,7 +12,7 @@ public class ExitRoom : MonoBehaviour {
         GameManager = GameObject.FindGameObjectWithTag("GameManager");
         BossSpawn = Instantiate(GameManager.GetComponent<GameManager>().GenerateABoss(), new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, 1f), gameObject.transform.rotation).gameObject;
         BossSpawn.transform.parent = gameObject.transform;
-        BossSpawn.SetActive(false);
+        BossSpawn.GetComponent<BaseBoss>().enabled = false;
 	}
 	
 	// Update is called once per frame
