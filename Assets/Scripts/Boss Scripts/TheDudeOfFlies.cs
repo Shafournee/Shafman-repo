@@ -46,10 +46,12 @@ public class TheDudeOfFlies : BaseBoss {
     {
         while(true)
         {
+            //Determines how long it takes to spawn flies and how many
             int SecondsToWaitForFlySpawn = Random.Range(3, 8);
             int RandomNumberOfSpawnFlies = Random.Range(1, 4);
             for (int i = 0; i < RandomNumberOfSpawnFlies; i++)
             {
+                //Determines which fly spawns with small flys having a 70% chance
                 GameObject InstantiatedFly;
                 float WhichFly = Random.Range(0f, 1f);
                 float FlyStartDirectionx = Mathf.Sign(Random.Range(-1, 1));
