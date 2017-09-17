@@ -12,16 +12,20 @@ public class WalkingEnemy : BaseEnemy {
     float ActualVelocity;
     enum Direction { Up, Down, Left, Right }
     List<Direction> DirectionList;
+    public GameObject TopCollider;
+    public GameObject BottomCollider;
+    public GameObject LeftCollider;
+    public GameObject RightCollider;
 
-
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
 
         Rigidbody = GetComponent<Rigidbody2D>();
         ActualVelocity = 5f;
         EnemyHealth = 4;
         DirectionList = new List<Direction>();
-        ChooseDirection();
+        //ChooseDirection();
+        PopulateDirectionList();
     }
 	
 	// Update is called once per frame
@@ -29,15 +33,75 @@ public class WalkingEnemy : BaseEnemy {
         Rigidbody.velocity = new Vector2(HorizontalVelocity, VerticalVelocity);
 	}
 
-    private void OnCollisionStay2D(Collision2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        ChooseDirection();
+        //ChooseDirection();
 
         if (collision.collider.tag == "Player")
         {
             collision.collider.GetComponent<Player>().OnHit(transform.position);
         }
+        PopulateDirectionList();
     }
+
+    private void PopulateDirectionList()
+    {
+        if (TopCollider.GetComponent<WalkingEnemyDirectionDetector>().IsTriggered == false)
+        {
+            DirectionList.Add(Direction.Up);
+        }
+        if (BottomCollider.GetComponent<WalkingEnemyDirectionDetector>().IsTriggered == false)
+        {
+            DirectionList.Add(Direction.Down);
+        }
+        if (RightCollider.GetComponent<WalkingEnemyDirectionDetector>().IsTriggered == false)
+        {
+            DirectionList.Add(Direction.Right);
+        }
+        if (LeftCollider.GetComponent<WalkingEnemyDirectionDetector>().IsTriggered == false)
+        {
+            DirectionList.Add(Direction.Left);
+        }
+
+        ChooseDirectionFromList();
+    }
+
+    private void ChooseDirectionFromList()
+    {
+        print(DirectionList.Count);
+        int DirectionIndex = Random.Range(0, DirectionList.Count);
+        ChangeWalkDirection(DirectionList[DirectionIndex]);
+        
+    }
+
+    private void ChangeWalkDirection(Direction DirectionChange)
+    {
+        if (DirectionChange == Direction.Up)
+        {
+            VerticalVelocity = ActualVelocity;
+            HorizontalVelocity = 0f;
+        }
+        else if (DirectionChange == Direction.Down)
+        {
+            VerticalVelocity = -ActualVelocity;
+            HorizontalVelocity = 0f;
+        }
+        else if (DirectionChange == Direction.Right)
+        {
+            VerticalVelocity = 0f;
+            HorizontalVelocity = ActualVelocity;
+        }
+        else if (DirectionChange == Direction.Left)
+        {
+            VerticalVelocity = 0f;
+            HorizontalVelocity = -ActualVelocity;
+        }
+        //Remove each option from the list
+        DirectionList.Clear();
+    }
+
+
+    /*
 
     private void FillTheList()
     {
@@ -123,6 +187,8 @@ public class WalkingEnemy : BaseEnemy {
             }
         }
     }
+
+    */
 
     public override void OnHit(Vector3 DamageSourcePosition, float PlayerBulletDamage)
     {

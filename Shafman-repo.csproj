@@ -90,6 +90,7 @@
     <Compile Include="Assets\Scripts\Enemy Scripts\DirectionalTurretEnemy.cs" />
     <Compile Include="Assets\Scripts\Enemy Scripts\TurretEnemy.cs" />
     <Compile Include="Assets\Scripts\Enemy Scripts\WalkingEnemy.cs" />
+    <Compile Include="Assets\Scripts\Enemy Scripts\WalkingEnemyDirectionDetector.cs" />
     <Compile Include="Assets\Scripts\Exit.cs" />
     <Compile Include="Assets\Scripts\ExitRoom.cs" />
     <Compile Include="Assets\Scripts\FloorGenerator.cs" />
