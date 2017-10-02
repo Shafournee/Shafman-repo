@@ -106,7 +106,8 @@
     <Compile Include="Assets\Scripts\Item Scipts\GhostItem.cs" />
     <Compile Include="Assets\Scripts\ItemRoom.cs" />
     <Compile Include="Assets\Scripts\Minimap.cs" />
-    <Compile Include="Assets\Scripts\Player.cs" />
+    <Compile Include="Assets\Scripts\Player Scripts\Player.cs" />
+    <Compile Include="Assets\Scripts\Player Scripts\PlayerAnimationManager.cs" />
     <Compile Include="Assets\Scripts\PlayerUI.cs" />
     <Compile Include="Assets\Scripts\RoomManager.cs" />
     <Compile Include="Assets\Scripts\TitleScreen.cs" />

@@ -24,8 +24,6 @@ public class Player : MonoBehaviour {
 
     KeyCode Exit = KeyCode.Escape;
 
-    enum BodyDirection { Up, Down, Left, Right, Static }
-
     //Make us able to call the Ball Prefab
     public Transform BallPrefab;
     //Provides a temporary game object for the pickup animation
@@ -69,7 +67,7 @@ public class Player : MonoBehaviour {
 
     //Get the animators
     Animator HeadAnimator;
-    Animator BodyAnimator;
+
 
     GameObject GameManager;
 
@@ -90,9 +88,6 @@ public class Player : MonoBehaviour {
         BulletVelocityModifierx = 0f;
         BulletVelocityModifiery = 0f;
         BulletSize = 1f;
-
-        HeadAnimator = GetComponentsInChildren<Animator>()[0];
-        BodyAnimator = transform.Find("Body").GetComponent<Animator>();
 
         SpriteHead = transform.Find("Head").GetComponent<SpriteRenderer>();
         SpriteBody = transform.Find("Body").GetComponent<SpriteRenderer>();
@@ -144,7 +139,7 @@ public class Player : MonoBehaviour {
         {
             PlayerBody.velocity = new Vector2(PlayerBody.velocity.x, Speed);
             BulletVelocityModifiery = 20f;
-            BodyAnimationManager(BodyDirection.Up);
+            gameObject.GetComponent<PlayerAnimationManager>().BodyAnimationManager(BodyDirection.Up);
         }
 
         //Make the player move down
@@ -152,7 +147,7 @@ public class Player : MonoBehaviour {
         {
             PlayerBody.velocity = new Vector2(PlayerBody.velocity.x, -Speed);
             BulletVelocityModifiery = -20f;
-            BodyAnimationManager(BodyDirection.Down);
+            gameObject.GetComponent<PlayerAnimationManager>().BodyAnimationManager(BodyDirection.Down);
         }
 
         //Make the player's vertical velocity go to zero if pressing no vertical movement keys
@@ -167,7 +162,10 @@ public class Player : MonoBehaviour {
         {
             PlayerBody.velocity = new Vector2(-Speed, PlayerBody.velocity.y);
             BulletVelocityModifierx = -20f;
-            BodyAnimationManager(BodyDirection.Left);
+            if (Input.GetKey(MoveUp) == false && Input.GetKey(MoveDown) == false)
+            {
+                gameObject.GetComponent<PlayerAnimationManager>().BodyAnimationManager(BodyDirection.Left);
+            }
         }
 
         //Make the player move right
@@ -175,7 +173,10 @@ public class Player : MonoBehaviour {
         {
             PlayerBody.velocity = new Vector2(Speed, PlayerBody.velocity.y);
             BulletVelocityModifierx = 20f;
-            BodyAnimationManager(BodyDirection.Right);
+            if (Input.GetKey(MoveUp) == false && Input.GetKey(MoveDown) == false)
+            {
+                gameObject.GetComponent<PlayerAnimationManager>().BodyAnimationManager(BodyDirection.Right);
+            }
         }
 
         //Make the player's horizontal velocity go to zero if pressing no horizontal movement keys
@@ -187,8 +188,10 @@ public class Player : MonoBehaviour {
         //Reset the body to standing if movement keys are released
         if (Input.GetKeyUp(MoveUp) || Input.GetKeyUp(MoveDown) || Input.GetKeyUp(MoveLeft) || Input.GetKeyUp(MoveRight))
         {
-            BodyAnimationManager(BodyDirection.Static);
+            gameObject.GetComponent<PlayerAnimationManager>().BodyAnimationManager(BodyDirection.Static);
         }
+        
+
     }
 
     //Check if the player is colliding with anything, and if so return true or false
@@ -275,7 +278,7 @@ public class Player : MonoBehaviour {
                 //Fires bullets upwards
                 if (Input.GetKey(ShootUp))
                 {
-                    HeadAnimationManager("Up");
+                    gameObject.GetComponent<PlayerAnimationManager>().HeadAnimationManager(HeadDirection.Up);
                     GameObject temporaryprojectile = Instantiate(BallPrefab, new Vector2(transform.position.x, transform.position.y + .5f), transform.rotation).gameObject;
                     Rigidbody2D temporaryprojectilebody = temporaryprojectile.GetComponent<Rigidbody2D>();
                     temporaryprojectile.transform.localScale = new Vector3(1f * BulletSize, 1f * BulletSize, 1f * BulletSize);
@@ -299,7 +302,7 @@ public class Player : MonoBehaviour {
                 //Fires bullets downwards
                 else if (Input.GetKey(ShootDown))
                 {
-                    HeadAnimationManager("Down");
+                    gameObject.GetComponent<PlayerAnimationManager>().HeadAnimationManager(HeadDirection.Down);
                     GameObject temporaryprojectile = Instantiate(BallPrefab, new Vector2(transform.position.x, transform.position.y - .8f), transform.rotation).gameObject;
                     Rigidbody2D temporaryprojectilebody = temporaryprojectile.GetComponent<Rigidbody2D>();
                     temporaryprojectile.transform.localScale = new Vector3(1f * BulletSize, 1f * BulletSize, 1f * BulletSize);
@@ -322,7 +325,7 @@ public class Player : MonoBehaviour {
                 //Fires bullets leftwards
                 else if (Input.GetKey(ShootLeft))
                 {
-                    HeadAnimationManager("Left");
+                    gameObject.GetComponent<PlayerAnimationManager>().HeadAnimationManager(HeadDirection.Left);
                     GameObject temporaryprojectile = Instantiate(BallPrefab, new Vector2(transform.position.x - .5f, transform.position.y), transform.rotation).gameObject;
                     Rigidbody2D temporaryprojectilebody = temporaryprojectile.GetComponent<Rigidbody2D>();
                     temporaryprojectile.transform.localScale = new Vector3(1f * BulletSize, 1f * BulletSize, 1f * BulletSize);
@@ -346,7 +349,7 @@ public class Player : MonoBehaviour {
                 //Fires bullets rightwards
                 else if (Input.GetKey(ShootRight))
                 {
-                    HeadAnimationManager("Right");
+                    gameObject.GetComponent<PlayerAnimationManager>().HeadAnimationManager(HeadDirection.Right);
                     GameObject temporaryprojectile = Instantiate(BallPrefab, new Vector2(transform.position.x + .5f, transform.position.y), transform.rotation).gameObject;
                     Rigidbody2D temporaryprojectilebody = temporaryprojectile.GetComponent<Rigidbody2D>();
                     temporaryprojectile.transform.localScale = new Vector3(1f * BulletSize, 1f * BulletSize, 1f * BulletSize);
@@ -368,7 +371,6 @@ public class Player : MonoBehaviour {
                 else
                 {
                     yield return null;
-                    HeadAnimationManager("Static");
                 }
                 
             }
@@ -453,58 +455,5 @@ public class Player : MonoBehaviour {
         Destroy(TemporaryItemPickup);
     }
 
-    //Handles the direction and animations of the head
-    private void HeadAnimationManager(string HeadDirection)
-    {
-        if(HeadDirection == "Down")
-        {
-            HeadAnimator.Play("ShootDown");
-        }
-        else if (HeadDirection == "Right")
-        {
-            HeadAnimator.Play("ShootRight");
-        }
-        else if (HeadDirection == "Left")
-        {
-            HeadAnimator.Play("ShootLeft");
-        }
-        else if (HeadDirection == "Up")
-        {
-            HeadAnimator.Play("ShootUp");
-        }
-        else if (HeadDirection == "Static")
-        {
 
-        }
-        else
-        {
-            HeadAnimator.Play("DefaultHead");
-        }
-        
-    }
-
-    //Handles the direction and animations of the body
-    private void BodyAnimationManager(BodyDirection MoveDirection)
-    {
-        if(MoveDirection == BodyDirection.Down)
-        {
-            BodyAnimator.Play("WalkDown");
-        }
-        else if(MoveDirection == BodyDirection.Up)
-        {
-
-        }
-        else if (MoveDirection == BodyDirection.Left)
-        {
-
-        }
-        else if (MoveDirection == BodyDirection.Right)
-        {
-
-        }
-        else if (MoveDirection == BodyDirection.Static)
-        {
-            BodyAnimator.Play("Standing");
-        }
-    }
 }
