@@ -15,7 +15,11 @@ public class PlayerAnimationManager : MonoBehaviour {
     public Sprite LookingDown;
     public Sprite LookingLeft;
     public Sprite LookingRight;
+    public Sprite ShootingUp;
     public Sprite ShootingDown;
+    public Sprite ShootingLeft;
+    public Sprite ShootingRight;
+    float ShootingSpeed;
 
 
     // Use this for initialization
@@ -24,6 +28,7 @@ public class PlayerAnimationManager : MonoBehaviour {
         HeadAnimator = transform.Find("Head").GetComponent<Animator>();
         BodyAnimator = transform.Find("Body").GetComponent<Animator>();
         SpriteHead = transform.Find("Head").GetComponent<SpriteRenderer>();
+        ShootingSpeed = gameObject.GetComponent<Player>().MinimumTimeBetweenFiring + 7;
     }
 	
 	// Update is called once per frame
@@ -40,22 +45,8 @@ public class PlayerAnimationManager : MonoBehaviour {
     //Handles the direction and animations of the head
     public void HeadAnimationManager(HeadDirection ShootDirection)
     {
-        if (ShootDirection == HeadDirection.Down)
-        {
-            SpriteHead.sprite = LookingDown;
-        }
-        else if (ShootDirection == HeadDirection.Up)
-        {
-            SpriteHead.sprite = LookingUp;
-        }
-        else if (ShootDirection == HeadDirection.Left)
-        {
-            SpriteHead.sprite = LookingLeft;
-        }
-        else if (ShootDirection == HeadDirection.Right)
-        {
-            SpriteHead.sprite = LookingRight;
-        }
+        SpriteHead.flipX = false;
+        StartCoroutine(HeadAnimation(ShootDirection));
     }
 
     private IEnumerator HeadAnimation(HeadDirection ShootDirection)
@@ -63,13 +54,52 @@ public class PlayerAnimationManager : MonoBehaviour {
         if(ShootDirection == HeadDirection.Down)
         {
             SpriteHead.sprite = ShootingDown;
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < ShootingSpeed; i++)
             {
                 yield return null;
             }
             SpriteHead.sprite = LookingDown;
-        }
             yield return null;
+        }
+
+        if (ShootDirection == HeadDirection.Up)
+        {
+            SpriteHead.sprite = ShootingUp;
+            for (int i = 0; i < ShootingSpeed; i++)
+            {
+                yield return null;
+            }
+            SpriteHead.sprite = LookingUp;
+            yield return null;
+        }
+
+        if (ShootDirection == HeadDirection.Left)
+        {
+            SpriteHead.flipX = true;
+            SpriteHead.sprite = ShootingLeft;
+            for (int i = 0; i < ShootingSpeed; i++)
+            {
+                yield return null;
+            }
+            SpriteHead.sprite = LookingLeft;
+            yield return null;
+        }
+
+        if (ShootDirection == HeadDirection.Right)
+        {
+            SpriteHead.sprite = ShootingRight;
+            for (int i = 0; i < ShootingSpeed; i++)
+            {
+                yield return null;
+            }
+            SpriteHead.sprite = LookingRight;
+            yield return null;
+        }
+
+        else if(ShootDirection == HeadDirection.Static)
+        {
+            SpriteHead.sprite = LookingDown;
+        }
     }
 
     //Handles the direction and animations of the body

@@ -44,8 +44,6 @@ public class Player : MonoBehaviour {
 
     [NonSerialized] public float BulletSize;
 
-    //Turns the player see through and makes them walk through rocks and over spikes
-    [NonSerialized] public bool IsGhost;
     //Sets whether the player is invincible after recently taking damage
     bool IsInvincible;
     //Make the player unable to move
@@ -81,7 +79,6 @@ public class Player : MonoBehaviour {
         MaxHealth = 6;
         BulletDamage = 1f;
         MinimumTimeBetweenFiring = .5f;
-        IsGhost = false;
         IsInvincible = false;
         PlayerCanMove = true;
         PlayerCanShoot = true;
@@ -370,6 +367,7 @@ public class Player : MonoBehaviour {
                 }
                 else
                 {
+                    gameObject.GetComponent<PlayerAnimationManager>().HeadAnimationManager(HeadDirection.Static);
                     yield return null;
                 }
                 
@@ -423,14 +421,7 @@ public class Player : MonoBehaviour {
         IsInvincible = false;
     }
 
-    public void ItemPickupEffects()
-    {
-        if (IsGhost)
-        {
-            gameObject.layer = LayerMask.NameToLayer("PlayerFlying");
-            BaseColor = new Color(BaseColor.r, BaseColor.g, BaseColor.b, 0.6f);
-        }
-    }
+    
 
     //Make the player play the zelda animation
     public void ItemPickupAnimation(Sprite ItemSprite)

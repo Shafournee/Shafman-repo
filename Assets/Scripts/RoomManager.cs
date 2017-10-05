@@ -68,8 +68,10 @@ public class RoomManager : MonoBehaviour {
     //Update Coordinates, Teleport the player, and teleport the camera when the player enters a door trigger
     public void OnDoorEnter(string DoorSide)
     {
+        
+
         //Moves the minimap when you enter a door
-        if(DoorSide == "Right")
+        if (DoorSide == "Right")
         {
             RoomCoordinatex++;
             PlayerTransform.position = new Vector3(PlayerTransform.position.x + 5, PlayerTransform.position.y, PlayerTransform.position.z);
@@ -86,24 +88,24 @@ public class RoomManager : MonoBehaviour {
         else if (DoorSide == "Top")
         {
             RoomCoordinatey++;
-            PlayerTransform.position = new Vector3(PlayerTransform.position.x, PlayerTransform.position.y + 5, PlayerTransform.position.z);
+            PlayerTransform.position = new Vector3(PlayerTransform.position.x, PlayerTransform.position.y + 5.5f, PlayerTransform.position.z);
             CameraTransform.position = new Vector3(CameraTransform.position.x, CameraTransform.position.y + 12, CameraTransform.position.z);
         }
 
         else if (DoorSide == "Bottom")
         {
             RoomCoordinatey--;
-            PlayerTransform.position = new Vector3(PlayerTransform.position.x, PlayerTransform.position.y - 5, PlayerTransform.position.z);
+            PlayerTransform.position = new Vector3(PlayerTransform.position.x, PlayerTransform.position.y - 5.5f, PlayerTransform.position.z);
             CameraTransform.position = new Vector3(CameraTransform.position.x, CameraTransform.position.y - 12, CameraTransform.position.z);
         }
         //Moves the minimap upon entering the new room
         Minimap.GetComponent<Minimap>().MoveTheMinimap(DoorSide, RoomCoordinatex, RoomCoordinatey);
         Minimap.GetComponent<Minimap>().SetRoomsActive();
-
         //Find the current room coordinates
         GameObject CurrentRoom = GameObject.Find("Room(" + RoomCoordinatex + "," + RoomCoordinatey + ")");
+
         //If there are enemies or a boss close all the doors on the level and spawn the enemies
-        if(CurrentRoom.GetComponentsInChildren<BaseEnemy>(true).Length > 0 || CurrentRoom.GetComponentsInChildren<BaseBoss>(true).Length > 0)
+        if (CurrentRoom.GetComponentsInChildren<BaseEnemy>(true).Length > 0 || CurrentRoom.GetComponentsInChildren<BaseBoss>(true).Length > 0)
         {
             //Closes all doors
             Doors = GameObject.FindGameObjectsWithTag("Door");
