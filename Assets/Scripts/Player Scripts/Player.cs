@@ -122,11 +122,10 @@ public class Player : MonoBehaviour {
         {
             GameManager.GetComponent<GameManager>().PauseGame();
         }
-        //Ensure the player can't go higher than 12 hearts
-        if (MaxHealth > 24)
-        {
-            MaxHealth = 24;
-        }
+
+        //Ensures that modifiable player values don't go too high or low
+        RestrictPlayerStats();
+        
     }
 
     void PlayerMovement()
@@ -253,6 +252,60 @@ public class Player : MonoBehaviour {
                 CurrentHealth = MaxHealth;
             }
 
+        }
+    }
+
+    private void RestrictPlayerStats()
+    {
+        //Ensure the player can't go higher than 12 hearts
+        if (MaxHealth > 24)
+        {
+            MaxHealth = 24;
+        }
+
+        if (BulletDamage > 7f)
+        {
+            BulletDamage = 4f;
+        }
+        if (BulletDamage < .3f)
+        {
+            BulletDamage = .3f;
+        }
+
+        if (MinimumTimeBetweenFiring < .1f)
+        {
+            MinimumTimeBetweenFiring = .1f;
+        }
+        if (MinimumTimeBetweenFiring > 1.2f)
+        {
+            MinimumTimeBetweenFiring = 1.2f;
+        }
+
+        if (Speed > 10f)
+        {
+            Speed = 10f;
+        }
+        if (Speed < 3f)
+        {
+            Speed = 3f;
+        }
+
+        if (BulletSpeed > 10f)
+        {
+            BulletSpeed = 10f;
+        }
+        if (BulletSpeed < 7f)
+        {
+            BulletSpeed = 7f;
+        }
+
+        if (BulletSize > 2f)
+        {
+            BulletSize = 2f;
+        }
+        if (BulletSize < .5f)
+        {
+            BulletSize = .5f;
         }
     }
 
