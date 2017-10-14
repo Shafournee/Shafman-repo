@@ -78,7 +78,7 @@ public class Player : MonoBehaviour {
         CurrentHealth = 6;
         MaxHealth = 6;
         BulletDamage = 1f;
-        MinimumTimeBetweenFiring = .5f;
+        MinimumTimeBetweenFiring = .3f;
         IsInvincible = false;
         PlayerCanMove = true;
         PlayerCanShoot = true;
@@ -232,6 +232,7 @@ public class Player : MonoBehaviour {
     private void LoseHealth()
     {
         CurrentHealth--;
+        GetComponent<PlayerItemPickupEffects>().CallOnLoseHealth();
         if (CurrentHealth <= 0)
         {
             SceneManager.LoadScene("GameOver");
@@ -430,6 +431,7 @@ public class Player : MonoBehaviour {
     }
 
     //Coroutine to make the player get pushed back from spikes
+    /*
     IEnumerator Knockback(Vector3 ColliderPosition)
     {
         PlayerCanMove = false;
@@ -445,6 +447,7 @@ public class Player : MonoBehaviour {
         }
         PlayerCanMove = true;
     }
+    */
 
     //Coroutine to make the player blink and keep invincibility
     IEnumerator InvincibilityCoroutine()

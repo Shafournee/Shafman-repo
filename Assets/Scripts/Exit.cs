@@ -23,6 +23,7 @@ public class Exit : MonoBehaviour {
     {
         if(Collider.tag == "Player")
         {
+            Player.GetComponent<PlayerItemPickupEffects>().CallOnFloorChange();
             SceneManager.LoadScene("RandomGenerationTest");
             //Place the player in the origin room once generated
             Player.transform.position = new Vector3(0f, 0f, 1f);

@@ -17,6 +17,11 @@ public class BaseItem : MonoBehaviour {
     protected string NameText;
     protected Sprite ItemSprite;
 
+    //Event handlers
+    protected ItemEventHandler OnHit;
+    protected ItemEventHandler OnLoseHealth;
+    protected ItemEventHandler FloorChangeHandler;
+
     // Use this for initialization
     public virtual void Start () {
         Player = GameObject.FindGameObjectWithTag("Player");
@@ -41,6 +46,10 @@ public class BaseItem : MonoBehaviour {
             Player.GetComponent<Player>().ItemPickupAnimation(ItemSprite);
             Canvas.GetComponent<PlayerUI>().CallItemTextCoroutine(NameText, PickupText);
             Destroy(gameObject);
+
+            Player.GetComponent<PlayerItemPickupEffects>().OnFloorChange += FloorChangeHandler;
+            Player.GetComponent<PlayerItemPickupEffects>().OnHit += OnHit;
+            Player.GetComponent<PlayerItemPickupEffects>().OnLoseHeath += OnLoseHealth;
         }
     }
 }

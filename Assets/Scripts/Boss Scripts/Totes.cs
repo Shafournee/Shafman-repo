@@ -88,12 +88,28 @@ public class Totes : BaseBoss {
             TotesBody.transform.Rotate(Vector3.forward, Time.deltaTime * SpinAttackSpeed, Space.World);
             yield return null;
         }
-        SpinRecovery();
+        StartCoroutine(SpinRecovery());
     }
 
-    private void SpinRecovery()
+    private IEnumerator SpinRecovery()
     {
         Rigidbody.velocity = new Vector3(0f, 0f, 1f);
+        Quaternion StartRotation = TotesBody.transform.rotation;
+        float t = 0f;
+        while(t < 1f)
+        {
+            TotesBody.transform.rotation = Quaternion.Slerp(StartRotation, Quaternion.identity, t);
+            if(RageActive)
+            {
+                t += Time.deltaTime * 2f;
+            }
+            else
+            {
+                t += Time.deltaTime;
+            }
+            yield return null;
+        }
+        
         StartCoroutine(TimeBeforeNextSpin());
     }
 
