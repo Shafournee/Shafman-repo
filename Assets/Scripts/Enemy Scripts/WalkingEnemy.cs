@@ -68,7 +68,6 @@ public class WalkingEnemy : BaseEnemy {
 
     private void ChooseDirectionFromList()
     {
-        print(DirectionList.Count);
         int DirectionIndex = Random.Range(0, DirectionList.Count);
         ChangeWalkDirection(DirectionList[DirectionIndex]);
         
