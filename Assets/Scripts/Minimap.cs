@@ -25,11 +25,19 @@ public class Minimap : MonoBehaviour {
     public Image BossRoomImage;
     //Array of both the images
     private Image[] RoomIcons;
-
+    //Reveals the minimap
+    public bool RevealTheMinimap;
+    GameObject Player;
 
 	// Use this for initialization
 	void Start () {
         //RoomCoordinates = FloorGenerator.GetComponent<FloorGenerator>().CoordinateList;
+        Player = GameObject.FindGameObjectWithTag("Player");
+        RevealTheMinimap = Player.GetComponent<PlayerItemPickupEffects>().RevealedMinimap;
+        if(RevealTheMinimap)
+        {
+            RevealTheMinimapFunction();
+        }
     }
 	
 	// Update is called once per frame
@@ -192,6 +200,31 @@ public class Minimap : MonoBehaviour {
                 {
                     RoomIcons[1].enabled = true;
                 }
+            }
+        }
+        
+    }
+
+    public void RevealTheMinimapFunction()
+    {
+        for (int i = 0; i < DrawnRooms.Count; i++)
+        {
+            DrawnRooms[i].enabled = true;
+            if (PlayerCurrentRoom == MinimapCoordinates[i])
+            {
+                DrawnRooms[i].GetComponent<Image>().sprite = CurrentRoom;
+            }
+            else
+            {
+                DrawnRooms[i].GetComponent<Image>().sprite = ExploredRoom;
+            }
+            if (DrawnRooms[i] == DrawnRooms[DrawnRooms.Count - 2])
+            {
+                RoomIcons[0].enabled = true;
+            }
+            else if (DrawnRooms[i] == DrawnRooms[DrawnRooms.Count - 1])
+            {
+                RoomIcons[1].enabled = true;
             }
         }
     }

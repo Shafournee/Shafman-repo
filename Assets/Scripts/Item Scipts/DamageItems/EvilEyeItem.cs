@@ -8,7 +8,7 @@ public class EvilEyeItem : BaseItem {
     public override void Start()
     {
         base.Start();
-        BulletDamage = 1f;
+        BulletDamage = .5f;
         ItemSprite = gameObject.GetComponent<SpriteRenderer>().sprite;
         NameText = "Cats Eye";
         PickupText = "Damage up";

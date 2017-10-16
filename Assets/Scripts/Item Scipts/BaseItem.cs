@@ -21,6 +21,7 @@ public class BaseItem : MonoBehaviour {
     protected ItemEventHandler OnHit;
     protected ItemEventHandler OnLoseHealth;
     protected ItemEventHandler FloorChangeHandler;
+    protected ItemEventHandler OnShoot;
 
     // Use this for initialization
     public virtual void Start () {
@@ -50,6 +51,7 @@ public class BaseItem : MonoBehaviour {
             Player.GetComponent<PlayerItemPickupEffects>().OnFloorChange += FloorChangeHandler;
             Player.GetComponent<PlayerItemPickupEffects>().OnHit += OnHit;
             Player.GetComponent<PlayerItemPickupEffects>().OnLoseHeath += OnLoseHealth;
+            Player.GetComponent<PlayerItemPickupEffects>().OnShoot += OnShoot;
         }
     }
 }

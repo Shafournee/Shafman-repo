@@ -11,10 +11,9 @@ public class BunnySlippersItem : BaseItem {
     {
         base.Start();
         Speed = 1f;
-        BulletSpeed = .1f;
         ItemSprite = gameObject.GetComponent<SpriteRenderer>().sprite;
         NameText = "Bunny Slippers";
-        PickupText = "Speed up, bullet speed slightly up";
+        PickupText = "Speed up";
     }
 
     // Update is called once per frame

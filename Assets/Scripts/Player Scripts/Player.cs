@@ -24,6 +24,8 @@ public class Player : MonoBehaviour {
 
     KeyCode Exit = KeyCode.Escape;
 
+    KeyCode P = KeyCode.P;
+
     //Make us able to call the Ball Prefab
     public Transform BallPrefab;
     //Provides a temporary game object for the pickup animation
@@ -52,6 +54,8 @@ public class Player : MonoBehaviour {
     public bool PlayerCanShoot;
     //Checks if the player is colliding with any objects
     bool IsColliding;
+    //Tells the game whether or not the character is shielded
+    [NonSerialized] public bool IsShielded;
 
     //Provide a modifier seperate to the player's speed to make the projectiles able to be shot diagonally, like in isaac
     float BulletVelocityModifierx;
@@ -100,6 +104,8 @@ public class Player : MonoBehaviour {
         DontDestroyOnLoad(gameObject);
 
         GameManager = GameObject.FindGameObjectWithTag("GameManager");
+
+        IsShielded = false;
     }
 
     // Update is called once per frame
@@ -125,7 +131,12 @@ public class Player : MonoBehaviour {
 
         //Ensures that modifiable player values don't go too high or low
         RestrictPlayerStats();
-        
+
+        if (Input.GetKeyDown(P))
+        {
+            Debug.Log(BulletDamage);
+        }
+
     }
 
     void PlayerMovement()
@@ -219,7 +230,12 @@ public class Player : MonoBehaviour {
     //Creating a single Function that runs all the Coroutines
     public void OnHit(Vector3 DamageSourcePosition)
     {
-        if (!IsInvincible)
+        if (IsShielded)
+        {
+            IsShielded = false;
+            StartCoroutine(InvincibilityCoroutine());
+        }
+        else if (!IsInvincible)
         {
             LoseHealth();
             //StartCoroutine(Knockback(DamageSourcePosition));
@@ -324,6 +340,7 @@ public class Player : MonoBehaviour {
             //make sure the player can shoot, and if they can't just return nothing
             if(PlayerCanShoot)
             {
+                gameObject.GetComponent<PlayerItemPickupEffects>().CallOnShoot();
                 //Provides a divisor for the bullet velocity modifier by the player so I don't have to change each individual one lol
                 const int PlayerVelocityBulletModifier = 20;
                 //Fires bullets upwards

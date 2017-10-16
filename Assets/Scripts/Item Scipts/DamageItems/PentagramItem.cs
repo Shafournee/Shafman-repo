@@ -8,7 +8,7 @@ public class PentagramItem : BaseItem {
     public override void Start()
     {
         base.Start();
-        BulletDamage = 3f;
+        BulletDamage = 1f;
         ItemSprite = gameObject.GetComponent<SpriteRenderer>().sprite;
         NameText = "Pentagram";
         PickupText = "Damage way up, but you're cursed";

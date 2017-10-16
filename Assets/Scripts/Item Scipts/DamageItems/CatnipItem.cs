@@ -8,8 +8,8 @@ public class CatnipItem : BaseItem {
 	public override void Start () {
         base.Start();
         BulletSize = 2f;
-        BulletDamage = 2f;
-        BulletSpeed = -1f;
+        BulletDamage = .5f;
+        BulletSpeed = -.5f;
         ItemSprite = gameObject.GetComponent<SpriteRenderer>().sprite;
         NameText = "Catnip";
         PickupText = "Damage way up, shot speed way down, big tears";

@@ -11,15 +11,19 @@ public class PlayerItemPickupEffects : MonoBehaviour {
     public event ItemEventHandler OnHit;
     public event ItemEventHandler OnFloorChange;
     public event ItemEventHandler OnLoseHeath;
+    public event ItemEventHandler OnShoot;
 
     //Turns the player see through and makes them walk through rocks and over spikes
     [NonSerialized] public bool IsGhost;
+    [NonSerialized] public bool RevealedMinimap;
+    [NonSerialized] public bool IsShielded;
+    GameObject Minimap;
 
     // Use this for initialization
     void Start () {
         IsGhost = false;
-
-        
+        RevealedMinimap = false;
+        Minimap = GameObject.FindGameObjectWithTag("Minimap");
     }
 	
 	// Update is called once per frame
@@ -34,6 +38,17 @@ public class PlayerItemPickupEffects : MonoBehaviour {
             Color ColorBasis = gameObject.GetComponent<Player>().BaseColor;
             gameObject.layer = LayerMask.NameToLayer("PlayerFlying");
             gameObject.GetComponent<Player>().BaseColor = new Color(ColorBasis.r, ColorBasis.g, ColorBasis.b, 0.6f);
+        }
+
+        if (RevealedMinimap)
+        {
+            Minimap.GetComponent<Minimap>().RevealTheMinimap = true;
+            Minimap.GetComponent<Minimap>().RevealTheMinimapFunction();
+        }
+
+        if (IsShielded)
+        {
+            gameObject.GetComponent<Player>().IsShielded = true;
         }
     }
 
@@ -51,5 +66,13 @@ public class PlayerItemPickupEffects : MonoBehaviour {
         {
             OnFloorChange.Invoke();
         }   
+    }
+
+    public void CallOnShoot()
+    {
+        if(OnShoot != null)
+        {
+            OnShoot.Invoke();
+        }
     }
 }

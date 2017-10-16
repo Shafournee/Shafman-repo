@@ -8,7 +8,7 @@ public class MouseTrapItem : BaseItem {
     public override void Start()
     {
         base.Start();
-        BulletDamage = .5f;
+        BulletDamage = .4f;
         Speed = .2f;
         ItemSprite = gameObject.GetComponent<SpriteRenderer>().sprite;
         NameText = "Mouse Trap";

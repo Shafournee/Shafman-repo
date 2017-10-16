@@ -6,13 +6,17 @@ public class RageItem : BaseItem {
 
     float DamageTakenOff = 0f;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    public override void Start()
+    {
         base.Start();
-        BulletDamage = 4f;
+        BulletDamage = 3f;
         FloorChangeHandler = ResetPlayerDamage;
         OnLoseHealth = LowerPlayerDamage;
-	}
+        ItemSprite = gameObject.GetComponent<SpriteRenderer>().sprite;
+        NameText = "Roid Rage";
+        PickupText = "Damage way up, but don't get hit";
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -22,16 +26,16 @@ public class RageItem : BaseItem {
     void LowerPlayerDamage()
     {
         Player PScript = Player.GetComponent<Player>();
-        if (PScript.BulletDamage <= 1f)
+        if (PScript.BulletDamage <= 2f)
         {
-            float DamageChange = PScript.BulletDamage - .5f;
+            float DamageChange = PScript.BulletDamage - 1f;
             DamageTakenOff += DamageChange;
-            PScript.BulletDamage = .5f;
+            PScript.BulletDamage = 1f;
         }
         else
         {
-            Player.GetComponent<Player>().BulletDamage -= .5f;
-            DamageTakenOff += .5f;
+            Player.GetComponent<Player>().BulletDamage -= 1f;
+            DamageTakenOff += 1f;
         }
     }
 
