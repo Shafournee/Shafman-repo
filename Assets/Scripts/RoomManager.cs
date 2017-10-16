@@ -27,9 +27,11 @@ public class RoomManager : MonoBehaviour {
 
     public Component[] EnemiesInRoom;
 
+    GameObject Player;
+
 	// Use this for initialization
 	void Start () {
-
+        Player = GameObject.FindGameObjectWithTag("Player");
         PlayerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         CameraTransform = GameObject.FindGameObjectWithTag("MainCamera").transform;
         Doors = GameObject.FindGameObjectsWithTag("Door");
@@ -68,7 +70,8 @@ public class RoomManager : MonoBehaviour {
     //Update Coordinates, Teleport the player, and teleport the camera when the player enters a door trigger
     public void OnDoorEnter(string DoorSide)
     {
-        
+        //Activate the shield upgrade
+        Player.GetComponent<Player>().IsShielded = true;
 
         //Moves the minimap when you enter a door
         if (DoorSide == "Right")

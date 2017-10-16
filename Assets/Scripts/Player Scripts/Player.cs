@@ -70,7 +70,7 @@ public class Player : MonoBehaviour {
     //Get the animators
     Animator HeadAnimator;
 
-
+    GameObject Shield;
     GameObject GameManager;
 
 
@@ -106,6 +106,7 @@ public class Player : MonoBehaviour {
         GameManager = GameObject.FindGameObjectWithTag("GameManager");
 
         IsShielded = false;
+        Shield = transform.GetChild(2).gameObject;
     }
 
     // Update is called once per frame
@@ -136,6 +137,8 @@ public class Player : MonoBehaviour {
         {
             Debug.Log(BulletDamage);
         }
+
+        ActivateTheShieldSprite();
 
     }
 
@@ -197,7 +200,7 @@ public class Player : MonoBehaviour {
         {
             gameObject.GetComponent<PlayerAnimationManager>().BodyAnimationManager(BodyDirection.Static);
         }
-        
+
 
     }
 
@@ -214,7 +217,7 @@ public class Player : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        
+
     }
 
     //Damages the player if walking on spikes
@@ -335,10 +338,10 @@ public class Player : MonoBehaviour {
     //The function for shooting
     IEnumerator ShootingCoroutine()
     {
-        while(true)
+        while (true)
         {
             //make sure the player can shoot, and if they can't just return nothing
-            if(PlayerCanShoot)
+            if (PlayerCanShoot)
             {
                 gameObject.GetComponent<PlayerItemPickupEffects>().CallOnShoot();
                 //Provides a divisor for the bullet velocity modifier by the player so I don't have to change each individual one lol
@@ -441,7 +444,7 @@ public class Player : MonoBehaviour {
                     gameObject.GetComponent<PlayerAnimationManager>().HeadAnimationManager(HeadDirection.Static);
                     yield return null;
                 }
-                
+
             }
             yield return null;
         }
@@ -494,7 +497,7 @@ public class Player : MonoBehaviour {
         IsInvincible = false;
     }
 
-    
+
 
     //Make the player play the zelda animation
     public void ItemPickupAnimation(Sprite ItemSprite)
@@ -519,5 +522,16 @@ public class Player : MonoBehaviour {
         Destroy(TemporaryItemPickup);
     }
 
+    private void ActivateTheShieldSprite()
+    {
+        if (IsShielded)
+        {
+            Shield.SetActive(true);
+        }
+        else
+        {
+            Shield.SetActive(false);
+        }
+    }
 
 }

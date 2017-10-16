@@ -45,7 +45,7 @@ MonoBehaviour:
   m_MinSize: {x: 683, y: 492}
   m_MaxSize: {x: 14004, y: 14042}
   vertical: 0
-  controlID: 57
+  controlID: 68
 --- !u!114 &3
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -209,7 +209,7 @@ MonoBehaviour:
   m_MinSize: {x: 406, y: 492}
   m_MaxSize: {x: 10002, y: 14042}
   vertical: 1
-  controlID: 58
+  controlID: 45
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -233,7 +233,7 @@ MonoBehaviour:
   m_MinSize: {x: 406, y: 221}
   m_MaxSize: {x: 8006, y: 4021}
   vertical: 0
-  controlID: 107
+  controlID: 46
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -353,18 +353,18 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 0
     m_Folders:
-    - Assets/Prefabs/Item Prefabs/HealthItems
+    - Assets/Prefabs/Enemy Prefabs
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Prefabs/Item Prefabs/HealthItems
+  - Assets/Prefabs/Enemy Prefabs
   m_LastFoldersGridSize: -1
   m_LastProjectPath: E:\Unity Projects\Shafman-repo
   m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 95}
-    m_SelectedIDs: 2e290000
-    m_LastClickedID: 10542
+    m_SelectedIDs: b6280000
+    m_LastClickedID: 10422
     m_ExpandedIDs: 000000005a260000aa260000be260000de260000f02600004c280000ba280000bc280000f228000010290000162a0000122b000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -509,9 +509,9 @@ MonoBehaviour:
     height: 575
   m_TreeViewState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 
-    m_LastClickedID: 0
-    m_ExpandedIDs: 8a09feff380afefffafaffffc0fbffffc2fbffffcefbffff1afcfffff4ffffff00000000
+    m_SelectedIDs: fc25ffff
+    m_LastClickedID: -55812
+    m_ExpandedIDs: fe25ffff02fcffff1afcffff00000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -561,14 +561,14 @@ MonoBehaviour:
     width: 1148
     height: 575
   m_SceneLighting: 1
-  lastFramingTime: 4070.4411541537524
+  lastFramingTime: 731.68461530355
   m_2DMode: 1
   m_isRotationLocked: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 499.91415, y: 272.2216, z: 0}
+    m_Target: {x: -1.8100132, y: -0.4787869, z: 0}
     speed: 2
-    m_Value: {x: 499.91415, y: 272.2216, z: 0}
+    m_Value: {x: -1.8100132, y: -0.4787869, z: 0}
   m_RenderMode: 0
   m_ValidateTrueMetals: 0
   m_SceneViewState:
@@ -595,9 +595,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 717.61786
+    m_Target: 2.454098
     speed: 2
-    m_Value: 717.61786
+    m_Value: 2.454098
   m_Ortho:
     m_Target: 1
     speed: 2
