@@ -48,6 +48,7 @@ public class PlayerItemPickupEffects : MonoBehaviour {
 
         if (IsShielded)
         {
+            GameObject.FindGameObjectWithTag("RoomManager").GetComponent<RoomManager>().PlayerHasShield = true;
             gameObject.GetComponent<Player>().IsShielded = true;
         }
     }

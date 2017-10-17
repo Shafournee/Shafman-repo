@@ -24,6 +24,7 @@ public class RoomManager : MonoBehaviour {
     public int RoomCoordinatey = 0;
     //Find if the item has spawned in a collision area
     public bool ItemIsColliding;
+    public bool PlayerHasShield;
 
     public Component[] EnemiesInRoom;
 
@@ -46,6 +47,14 @@ public class RoomManager : MonoBehaviour {
         Exit.GetComponent<BoxCollider2D>().enabled = false;
         Exit.GetComponent<SpriteRenderer>().enabled = false;
         DisableEnemiesOnStart();
+        if (Player.GetComponent<Player>().IsShielded)
+        {
+            PlayerHasShield = true;
+        }
+        else
+        {
+            PlayerHasShield = false;
+        }
     }
 	
 	// Update is called once per frame
@@ -71,7 +80,11 @@ public class RoomManager : MonoBehaviour {
     public void OnDoorEnter(string DoorSide)
     {
         //Activate the shield upgrade
-        Player.GetComponent<Player>().IsShielded = true;
+        if(PlayerHasShield)
+        {
+            Player.GetComponent<Player>().IsShielded = true;
+        }
+
 
         //Moves the minimap when you enter a door
         if (DoorSide == "Right")
