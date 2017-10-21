@@ -11,6 +11,8 @@ public class TurretEnemy : BaseEnemy {
     int BulletPosition = -1;
     //Determines the velocity of the bullet if facing left or right
     float ProjectileVelocity = -2f;
+    GameObject Player;
+    public bool FollowsPlayer;
 
     // Use this for initialization
     void Start()
@@ -19,6 +21,8 @@ public class TurretEnemy : BaseEnemy {
         Sprite = GetComponent<SpriteRenderer>();
         DirectionTurretIsFacing();
         StartCoroutine(StationaryTurretEnemyShootingScript());
+        StartCoroutine(FollowPlayerYPosition());
+        Player = GameObject.FindGameObjectWithTag("Player");
     }
 
     // Update is called once per frame
@@ -71,5 +75,17 @@ public class TurretEnemy : BaseEnemy {
             ProjectileVelocity = -2f;
         }
         return BulletPosition;
+    }
+
+    IEnumerator FollowPlayerYPosition()
+    {
+        while(FollowsPlayer)
+        {
+            float LerpTime = .2f;
+            Vector3 EndVector = new Vector3(gameObject.transform.position.x, Player.transform.position.y, 1f);
+            Debug.Log(Player);
+            gameObject.transform.position = Vector3.Lerp(gameObject.transform.position, EndVector, LerpTime * Time.deltaTime);
+            yield return null;
+        }
     }
 }

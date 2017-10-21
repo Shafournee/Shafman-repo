@@ -25,6 +25,14 @@ public class WalkingEnemyDirectionDetector : MonoBehaviour {
         
     }
 
+    private void OnTriggerStay2D(Collider2D collider)
+    {
+        if(collider.tag != "Player")
+        {
+            IsTriggered = true;
+        }
+    }
+
     private void OnTriggerExit2D(Collider2D collision)
     {
         IsTriggered = false;
