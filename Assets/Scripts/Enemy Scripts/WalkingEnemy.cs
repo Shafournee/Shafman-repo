@@ -76,9 +76,17 @@ public class WalkingEnemy : BaseEnemy {
 
     private void ChooseDirectionFromList()
     {
-        int DirectionIndex = Random.Range(0, DirectionList.Count);
-        ChangeWalkDirection(DirectionList[DirectionIndex]);
-        
+
+        if(DirectionList != null)
+        {
+            int DirectionIndex = Random.Range(0, DirectionList.Count);
+            ChangeWalkDirection(DirectionList[DirectionIndex]);
+        }
+        else
+        {
+            PopulateDirectionList();
+        }
+
     }
 
     private void ChangeWalkDirection(Direction DirectionChange)
@@ -103,6 +111,7 @@ public class WalkingEnemy : BaseEnemy {
             VerticalVelocity = 0f;
             HorizontalVelocity = -ActualVelocity;
         }
+        
         //Remove each option from the list
         DirectionList.Clear();
     }
