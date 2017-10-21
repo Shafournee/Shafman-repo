@@ -19,10 +19,10 @@ public class TurretEnemy : BaseEnemy {
     {
         EnemyHealth = 3;
         Sprite = GetComponent<SpriteRenderer>();
+        Player = GameObject.FindGameObjectWithTag("Player");
         DirectionTurretIsFacing();
         StartCoroutine(StationaryTurretEnemyShootingScript());
         StartCoroutine(FollowPlayerYPosition());
-        Player = GameObject.FindGameObjectWithTag("Player");
     }
 
     // Update is called once per frame
@@ -81,10 +81,9 @@ public class TurretEnemy : BaseEnemy {
     {
         while(FollowsPlayer)
         {
-            float LerpTime = .2f;
+            float LerpTime = 2f * Time.deltaTime;
             Vector3 EndVector = new Vector3(gameObject.transform.position.x, Player.transform.position.y, 1f);
-            Debug.Log(Player);
-            gameObject.transform.position = Vector3.Lerp(gameObject.transform.position, EndVector, LerpTime * Time.deltaTime);
+            gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, EndVector, LerpTime);
             yield return null;
         }
     }
