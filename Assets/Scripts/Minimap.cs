@@ -38,6 +38,7 @@ public class Minimap : MonoBehaviour {
         {
             RevealTheMinimapFunction();
         }
+        Player.GetComponent<PlayerItemPickupEffects>().FindMinimap();
     }
 	
 	// Update is called once per frame

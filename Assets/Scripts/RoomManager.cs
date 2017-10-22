@@ -85,33 +85,38 @@ public class RoomManager : MonoBehaviour {
             Player.GetComponent<Player>().IsShielded = true;
         }
 
-
+        GameObject PlayerNextRoom;
         //Moves the minimap when you enter a door
         if (DoorSide == "Right")
         {
             RoomCoordinatex++;
-            PlayerTransform.position = new Vector3(PlayerTransform.position.x + 5, PlayerTransform.position.y, PlayerTransform.position.z);
+            //Find the room the player is going to end up in and use that to set their position
+            PlayerNextRoom = GameObject.Find("Room(" + RoomCoordinatex + "," + RoomCoordinatey + ")");
+            PlayerTransform.position = new Vector3(PlayerNextRoom.transform.localPosition.x - 7.5f, PlayerNextRoom.transform.localPosition.y, PlayerTransform.position.z);
             CameraTransform.position = new Vector3(CameraTransform.position.x + 20, CameraTransform.position.y, CameraTransform.position.z);
         }
 
         else if (DoorSide == "Left")
         {
             RoomCoordinatex--;
-            PlayerTransform.position = new Vector3(PlayerTransform.position.x - 5, PlayerTransform.position.y, PlayerTransform.position.z);
+            PlayerNextRoom = GameObject.Find("Room(" + RoomCoordinatex + "," + RoomCoordinatey + ")");
+            PlayerTransform.position = new Vector3(PlayerNextRoom.transform.localPosition.x + 7.5f, PlayerNextRoom.transform.localPosition.y, PlayerTransform.position.z);
             CameraTransform.position = new Vector3(CameraTransform.position.x - 20, CameraTransform.position.y, CameraTransform.position.z);
         }
 
         else if (DoorSide == "Top")
         {
             RoomCoordinatey++;
-            PlayerTransform.position = new Vector3(PlayerTransform.position.x, PlayerTransform.position.y + 5.5f, PlayerTransform.position.z);
+            PlayerNextRoom = GameObject.Find("Room(" + RoomCoordinatex + "," + RoomCoordinatey + ")");
+            PlayerTransform.position = new Vector3(PlayerNextRoom.transform.localPosition.x, PlayerNextRoom.transform.localPosition.y - 2.9f, PlayerTransform.position.z);
             CameraTransform.position = new Vector3(CameraTransform.position.x, CameraTransform.position.y + 12, CameraTransform.position.z);
         }
 
         else if (DoorSide == "Bottom")
         {
             RoomCoordinatey--;
-            PlayerTransform.position = new Vector3(PlayerTransform.position.x, PlayerTransform.position.y - 5.5f, PlayerTransform.position.z);
+            PlayerNextRoom = GameObject.Find("Room(" + RoomCoordinatex + "," + RoomCoordinatey + ")");
+            PlayerTransform.position = new Vector3(PlayerNextRoom.transform.localPosition.x, PlayerNextRoom.transform.localPosition.y + 3.5f, PlayerTransform.position.z);
             CameraTransform.position = new Vector3(CameraTransform.position.x, CameraTransform.position.y - 12, CameraTransform.position.z);
         }
         //Moves the minimap upon entering the new room
@@ -130,12 +135,15 @@ public class RoomManager : MonoBehaviour {
                 Doors[i].GetComponent<BoxCollider2D>().isTrigger = false;
                 Doors[i].GetComponent<SpriteRenderer>().enabled = false;
             }
-            StartCoroutine(HoldForEnemiesToSpawn(CurrentRoom));
             //Disable the player movement
             PlayerTransform.GetComponent<Player>().PlayerCanShoot = false;
             PlayerTransform.GetComponent<Player>().PlayerCanMove = false;
             PlayerTransform.GetComponent<Rigidbody2D>().velocity = new Vector3(0f, 0f, 1f);
-            if(CurrentRoom.GetComponentsInChildren<BaseBoss>(true).Length > 0)
+            if(CurrentRoom.GetComponentsInChildren<BaseEnemy>(true).Length > 0)
+            {
+                StartCoroutine(HoldForEnemiesToSpawn(CurrentRoom));
+            }
+            else if(CurrentRoom.GetComponentsInChildren<BaseBoss>(true).Length > 0)
             {
                 StartCoroutine(SpawnTheBoss(CurrentRoom));
             }

@@ -28,16 +28,14 @@ public class BigFlyEnemy : BaseEnemy {
     void Update()
     {
         //Get the actual value for the unit vector
-        VectorToPlayer = new Vector2(PlayerPosition.transform.position.x - gameObject.transform.position.x, PlayerPosition.transform.position.y - gameObject.transform.position.y);
-        MagnitudeOfVectorToPlayer = VectorToPlayer.magnitude;
-        UnitVectorToPlayer = new Vector2(VectorToPlayer.x / MagnitudeOfVectorToPlayer, VectorToPlayer.y / MagnitudeOfVectorToPlayer);
+        VectorToPlayer = new Vector2(PlayerPosition.transform.position.x - gameObject.transform.position.x, PlayerPosition.transform.position.y - gameObject.transform.position.y).normalized;
 
         //Move towards the player if too far away, if close enough shoot towards the player
         float dist = Vector3.Distance(PlayerPosition.position, transform.position);
-        float step = speed * Time.deltaTime;
-        if(dist > 5)
+        Vector3 NormalVector = new Vector3(PlayerPosition.position.x - gameObject.transform.position.x, PlayerPosition.position.y - gameObject.transform.position.y, 1f).normalized;
+        if (dist > 5)
         {
-            transform.position = Vector3.MoveTowards(transform.position, PlayerPosition.position, step);
+            gameObject.GetComponent<Rigidbody2D>().velocity = NormalVector * 2f;
         }
         else
         {
@@ -75,7 +73,7 @@ public class BigFlyEnemy : BaseEnemy {
             Animator.Play("BigFlyAttack");
             GameObject temporaryprojectile = Instantiate(EnemyBullet, new Vector2(transform.position.x, transform.position.y), transform.rotation).gameObject;
             Rigidbody2D temporaryprojectilebody = temporaryprojectile.GetComponent<Rigidbody2D>();
-            temporaryprojectilebody.velocity = UnitVectorToPlayer * BulletVelocity;
+            temporaryprojectilebody.velocity = VectorToPlayer * BulletVelocity;
             Destroy(temporaryprojectile, 5f);
             yield return new WaitForSeconds(TimeBetweenFiring);
         }

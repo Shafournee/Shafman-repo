@@ -22,7 +22,6 @@ public class GhostItem : BaseItem {
     public override void OnTriggerEnter2D(Collider2D collider)
     {
         base.OnTriggerEnter2D(collider);
-        Player.GetComponent<PlayerItemPickupEffects>().IsGhost = true;
-        Player.GetComponent<PlayerItemPickupEffects>().ItemPickupEffects();
+        Player.GetComponent<PlayerItemPickupEffects>().GhostEffect();
     }
 }

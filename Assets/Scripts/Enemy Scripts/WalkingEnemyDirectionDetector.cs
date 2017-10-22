@@ -15,7 +15,7 @@ public class WalkingEnemyDirectionDetector : MonoBehaviour {
 	void Update () {
 		
 	}
-
+    
     private void OnTriggerEnter2D(Collider2D collider)
     {
         if(collider.tag != "Player")
@@ -25,16 +25,19 @@ public class WalkingEnemyDirectionDetector : MonoBehaviour {
         
     }
 
-    private void OnTriggerStay2D(Collider2D collider)
-    {
-        if(collider.tag != "Player")
-        {
-            IsTriggered = true;
-        }
-    }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
+        StartCoroutine(WaitSomeFrames());
+    }
+   
+
+    IEnumerator WaitSomeFrames()
+    {
+        for(int i = 0; i < 5; i++)
+        {
+            yield return null;
+        }
         IsTriggered = false;
     }
 }

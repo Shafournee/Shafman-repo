@@ -21,8 +21,7 @@ public class ShieldItem : BaseItem {
     public override void OnTriggerEnter2D(Collider2D collider)
     {
         base.OnTriggerEnter2D(collider);
-        Player.GetComponent<PlayerItemPickupEffects>().IsShielded = true;
-        Player.GetComponent<PlayerItemPickupEffects>().ItemPickupEffects();
+        Player.GetComponent<PlayerItemPickupEffects>().ShieldEffect();
     }
 
 }

@@ -16,8 +16,8 @@ public class BabyFlyEnemy : BaseEnemy {
 	
 	// Update is called once per frame
 	void Update () {
-        float step = speed * Time.deltaTime;
-        transform.position = Vector3.MoveTowards(transform.position, PlayerPosition.position, step);
+        Vector3 NormalVector = new Vector3(PlayerPosition.position.x - gameObject.transform.position.x, PlayerPosition.position.y - gameObject.transform.position.y, 1f).normalized;
+        gameObject.GetComponent<Rigidbody2D>().velocity = NormalVector * 3f;
 	}
 
     public override void OnHit(Vector3 DamageSourcePosition, float PlayerBulletDamage)

@@ -31,7 +31,7 @@ public class DirectionalTurretEnemy : BaseEnemy {
 
 
         float dist = Vector3.Distance(PlayerPosition.position, transform.position);
-        if (dist < 7)
+        if (dist < 10)
         {
             if (IsShootingCoroutineRunning == false)
             {

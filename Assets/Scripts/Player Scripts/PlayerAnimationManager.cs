@@ -51,79 +51,94 @@ public class PlayerAnimationManager : MonoBehaviour {
 
     private IEnumerator HeadAnimation(HeadDirection ShootDirection)
     {
-        if(ShootDirection == HeadDirection.Down)
-        {
-            SpriteHead.sprite = ShootingDown;
-            for (int i = 0; i < ShootingSpeed; i++)
-            {
-                yield return null;
-            }
-            SpriteHead.sprite = LookingDown;
-            yield return null;
-        }
-
-        if (ShootDirection == HeadDirection.Up)
-        {
-            SpriteHead.sprite = ShootingUp;
-            for (int i = 0; i < ShootingSpeed; i++)
-            {
-                yield return null;
-            }
-            SpriteHead.sprite = LookingUp;
-            yield return null;
-        }
-
-        if (ShootDirection == HeadDirection.Left)
-        {
-            SpriteHead.flipX = true;
-            SpriteHead.sprite = ShootingLeft;
-            for (int i = 0; i < ShootingSpeed; i++)
-            {
-                yield return null;
-            }
-            SpriteHead.sprite = LookingLeft;
-            yield return null;
-        }
-
-        if (ShootDirection == HeadDirection.Right)
-        {
-            SpriteHead.sprite = ShootingRight;
-            for (int i = 0; i < ShootingSpeed; i++)
-            {
-                yield return null;
-            }
-            SpriteHead.sprite = LookingRight;
-            yield return null;
-        }
-
-        else if(ShootDirection == HeadDirection.Static)
+        if (gameObject.GetComponent<Player>().PlayerCanMove == false)
         {
             SpriteHead.sprite = LookingDown;
         }
+        else
+        {
+            if (ShootDirection == HeadDirection.Down)
+            {
+                SpriteHead.sprite = ShootingDown;
+                for (int i = 0; i < ShootingSpeed; i++)
+                {
+                    yield return null;
+                }
+                SpriteHead.sprite = LookingDown;
+                yield return null;
+            }
+
+            if (ShootDirection == HeadDirection.Up)
+            {
+                SpriteHead.sprite = ShootingUp;
+                for (int i = 0; i < ShootingSpeed; i++)
+                {
+                    yield return null;
+                }
+                SpriteHead.sprite = LookingUp;
+                yield return null;
+            }
+
+            if (ShootDirection == HeadDirection.Left)
+            {
+                SpriteHead.flipX = true;
+                SpriteHead.sprite = ShootingLeft;
+                for (int i = 0; i < ShootingSpeed; i++)
+                {
+                    yield return null;
+                }
+                SpriteHead.sprite = LookingLeft;
+                yield return null;
+            }
+
+            if (ShootDirection == HeadDirection.Right)
+            {
+                SpriteHead.sprite = ShootingRight;
+                for (int i = 0; i < ShootingSpeed; i++)
+                {
+                    yield return null;
+                }
+                SpriteHead.sprite = LookingRight;
+                yield return null;
+            }
+
+            else if (ShootDirection == HeadDirection.Static)
+            {
+                SpriteHead.sprite = LookingDown;
+            }
+        }
+        
     }
 
     //Handles the direction and animations of the body
     public void BodyAnimationManager(BodyDirection MoveDirection)
     {
-        if (MoveDirection == BodyDirection.Down)
-        {
-            BodyAnimator.Play("WalkDown");
-        }
-        else if (MoveDirection == BodyDirection.Up)
-        {
-            BodyAnimator.Play("WalkUp");
-        }
-        else if (MoveDirection == BodyDirection.Left)
-        {
-            BodyAnimator.Play("WalkLeft");
-        }
-        else if (MoveDirection == BodyDirection.Right)
-        {
-            BodyAnimator.Play("WalkRight");
-        }
-        else if (MoveDirection == BodyDirection.Static)
+        if (gameObject.GetComponent<Player>().PlayerCanMove == false)
         {
             BodyAnimator.Play("Standing");
+        }
+        else
+        {
+            if (MoveDirection == BodyDirection.Down)
+            {
+                BodyAnimator.Play("WalkDown");
+            }
+            else if (MoveDirection == BodyDirection.Up)
+            {
+                BodyAnimator.Play("WalkUp");
+            }
+            else if (MoveDirection == BodyDirection.Left)
+            {
+                BodyAnimator.Play("WalkLeft");
+            }
+            else if (MoveDirection == BodyDirection.Right)
+            {
+                BodyAnimator.Play("WalkRight");
+            }
+            else if (MoveDirection == BodyDirection.Static)
+            {
+                BodyAnimator.Play("Standing");
+            }
         }
     }
 }
