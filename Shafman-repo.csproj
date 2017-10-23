@@ -79,6 +79,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\AudioManager.cs" />
+    <Compile Include="Assets\Scripts\Boss Scripts\AngryDudeScripts\AngryDude.cs" />
+    <Compile Include="Assets\Scripts\Boss Scripts\AngryDudeScripts\AngryDudeDetector.cs" />
     <Compile Include="Assets\Scripts\Boss Scripts\BaseBoss.cs" />
     <Compile Include="Assets\Scripts\Boss Scripts\TheDudeOfFlies.cs" />
     <Compile Include="Assets\Scripts\Boss Scripts\Totes.cs" />
