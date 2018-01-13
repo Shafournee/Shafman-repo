@@ -10,7 +10,7 @@ public class RageItem : BaseItem {
     public override void Start()
     {
         base.Start();
-        BulletDamage = 3f;
+        BulletDamage = 2f;
         FloorChangeHandler = ResetPlayerDamage;
         OnLoseHealth = LowerPlayerDamage;
         ItemSprite = gameObject.GetComponent<SpriteRenderer>().sprite;

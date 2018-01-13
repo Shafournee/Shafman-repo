@@ -11,8 +11,8 @@ public class TheDudeOfFlies : BaseBoss {
     // Use this for initialization
     protected override void Start () {
         base.Start();
-        BossMaxHealth = 10f;
-        BossCurrentHealth = 10f;
+        BossMaxHealth = 40f;
+        BossCurrentHealth = 40f;
         DoesDamageOnHit = true;
         Rigidbody = gameObject.GetComponent<Rigidbody2D>();
         ChangeStartDirection();

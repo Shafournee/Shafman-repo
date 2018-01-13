@@ -15,8 +15,8 @@ public class Totes : BaseBoss {
 	// Use this for initialization
 	protected override void Start () {
         base.Start();
-        BossMaxHealth = 10f;
-        BossCurrentHealth = 10f;
+        BossMaxHealth = 40f;
+        BossCurrentHealth = 40f;
         SpinSpeed = 360;
         DoesDamageOnHit = true;
         Rigidbody = gameObject.GetComponent<Rigidbody2D>();

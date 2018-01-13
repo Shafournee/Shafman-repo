@@ -240,7 +240,7 @@ public class RoomManager : MonoBehaviour {
     {
         //Spawns a heart with a 30% chance
         float HeartDrop = Random.Range(0f, 1f);
-        if (HeartDrop > .5f)
+        if (HeartDrop > .3f)
         {
             float FullHeartvsHalf = Random.Range(0f, 1f);
             if (FullHeartvsHalf > .7f)
